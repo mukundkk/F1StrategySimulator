@@ -19,7 +19,7 @@ public class Driver {
 	int tyreAge;
 	double stddev;
 
-	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs){
+	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev){
 		this.fastestQualiTime = qualiTime;
 		this.fuelCoefficientZero = fcZero;
 		this.fuelCoefficientOne = fcOne;
@@ -28,10 +28,15 @@ public class Driver {
 		this.c3coeffs = c3coeffs;
 		this.c2coeffs = c2coeffs;
 		this.c1coeffs = c1coeffs;
+		this.stddev = stddev;
 	}
 
 	public int getLapNumber() {
 		return lapNumber;
+	}
+
+	public void setLapNumber(int lapNumber) {
+		this.lapNumber = lapNumber;
 	}
 
 	public double getFuelRemaining() {
