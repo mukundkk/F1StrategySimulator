@@ -1,6 +1,6 @@
 package Models;
 
-public class Driver {
+public class Driver implements Comparable<Driver>{
 	int lapNumber;
 	double fastestQualiTime;
 	double currentLapTime;
@@ -15,11 +15,17 @@ public class Driver {
 	double[] c2coeffs;
 	double[] c1coeffs;
 
+	double totalRaceTime;
+
 	int tyreCompound;
 	int tyreAge;
 	double stddev;
 
-	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev){
+	String name;
+
+	LapTimeVarianceModel lapTimeModel;
+
+	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name){
 		this.fastestQualiTime = qualiTime;
 		this.fuelCoefficientZero = fcZero;
 		this.fuelCoefficientOne = fcOne;
@@ -29,6 +35,8 @@ public class Driver {
 		this.c2coeffs = c2coeffs;
 		this.c1coeffs = c1coeffs;
 		this.stddev = stddev;
+		this.name = name;
+		totalRaceTime = 0;
 	}
 
 	public int getLapNumber() {
@@ -60,6 +68,7 @@ public class Driver {
 	}
 
 	public double getCorrectedLapTime() {
+		lapTimeModel.lapTime();
 		return correctedLapTime;
 	}
 
@@ -86,6 +95,8 @@ public class Driver {
 	public void setTyreAge(int tyreAge) {
 		this.tyreAge = tyreAge;
 	}
+
+
 
 	public double getTyreCoeff(int compound, int cfNum){
 		double coeff = 0;
@@ -175,5 +186,25 @@ public class Driver {
 				System.exit(0);
 		}
 		return coeff;
+	}
+
+	public double getTotalRaceTime() {
+		return totalRaceTime;
+	}
+
+	public void setTotalRaceTime(double totalRaceTime) {
+		this.totalRaceTime = totalRaceTime;
+	}
+
+	public void init(){
+		lapTimeModel = new LapTimeVarianceModel(this);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int compareTo(Driver otherDriver){
+		return Double.compare(totalRaceTime, otherDriver.getTotalRaceTime());
 	}
 }
