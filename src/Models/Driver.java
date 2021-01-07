@@ -25,6 +25,8 @@ public class Driver implements Comparable<Driver>{
 
 	LapTimeVarianceModel lapTimeModel;
 
+	int position;
+
 	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name){
 		this.fastestQualiTime = qualiTime;
 		this.fuelCoefficientZero = fcZero;
@@ -201,10 +203,18 @@ public class Driver implements Comparable<Driver>{
 	}
 
 	public String getName() {
-		return name;
+		return name; 
 	}
 
 	public int compareTo(Driver otherDriver){
 		return Double.compare(totalRaceTime, otherDriver.getTotalRaceTime());
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 }

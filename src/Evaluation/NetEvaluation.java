@@ -5,10 +5,12 @@ import Models.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static Models.GlobalInfo.drivers;
+
 public class NetEvaluation {
 
 	public static void main(String[] args) {
-		ArrayList<Driver> drivers = new ArrayList<>();
+		drivers = new ArrayList<>();
 		GlobalInfo.setTotalLaps(25);
 
 		Driver nRosberg = new Driver(84.197, 5.595, 0.017, new double[]{0.553, 0.002, 0}, new double[]{0.035, -0.026, 0},
