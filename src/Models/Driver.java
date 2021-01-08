@@ -69,8 +69,7 @@ public class Driver implements Comparable<Driver>{
 	}
 
 	public double getCorrectedLapTime() {
-		lapTimeModel.lapTime();
-		return correctedLapTime;
+		return lapTimeModel.simulateLapTime();
 	}
 
 	public double getQualiTime() {

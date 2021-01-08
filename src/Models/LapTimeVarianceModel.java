@@ -11,7 +11,7 @@ public class LapTimeVarianceModel {
 		tyreModel = new TyreModel(driver);
 	}
 
-	public double lapTime(){
+	public double simulateLapTime(){
 		double lapTime = driver.getQualiTime() + fuelModel.correctLapTime() + tyreModel.calcResidual();
 		driver.setCorrectedLapTime(lapTime);
 		return lapTime;
