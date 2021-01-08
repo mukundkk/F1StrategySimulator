@@ -2,7 +2,7 @@ package Models;
 
 public class Driver implements Comparable<Driver>{
 	int lapNumber;
-	double fastestQualiTime;
+	double qualiTime;
 	double currentLapTime;
 	double correctedLapTime;
 	double fuelRemaining;
@@ -27,8 +27,7 @@ public class Driver implements Comparable<Driver>{
 
 	int position;
 
-	public Driver(double qualiTime, double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name){
-		this.fastestQualiTime = qualiTime;
+	public Driver(double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name){
 		this.fuelCoefficientZero = fcZero;
 		this.fuelCoefficientOne = fcOne;
 		this.c5coeffs = c5coeffs;
@@ -74,8 +73,12 @@ public class Driver implements Comparable<Driver>{
 		return correctedLapTime;
 	}
 
-	public double getFastestQualiTime() {
-		return fastestQualiTime;
+	public double getQualiTime() {
+		return qualiTime;
+	}
+
+	public void setQualiTime(double qualiTime) {
+		this.qualiTime = qualiTime;
 	}
 
 	public double getStddev() {
@@ -198,12 +201,13 @@ public class Driver implements Comparable<Driver>{
 		this.totalRaceTime = totalRaceTime;
 	}
 
-	public void init(){
+	public void init(double qualiTime){
+		setQualiTime(qualiTime);
 		lapTimeModel = new LapTimeVarianceModel(this);
 	}
 
 	public String getName() {
-		return name; 
+		return name;
 	}
 
 	public int compareTo(Driver otherDriver){
