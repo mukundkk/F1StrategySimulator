@@ -1,9 +1,12 @@
 package Models;
 
+
 import Circuits.AbuDhabi;
 import Circuits.Japan;
 import Circuits.Mexico;
 import Circuits.US;
+
+import java.util.Random;
 
 import static Models.GlobalInfo.*;
 
@@ -40,17 +43,18 @@ public class OvertakingModel {
 				overtakingProbability = DEFAULT_OVERTAKING_PROBABILITY;
 				break;
 		}
+		overtakingProbability *= 100;
 	}
 
 	public void simulateOvertakes(int lapNum){
 		for(int i = 0; i < drivers.size() - 1; i++) {
+			int actualPos = i + 1;
 			double deltaCumulativeLapTime = drivers.get(i + 1).getTotalRaceTime() - drivers.get(i).getTotalRaceTime();
-			if (deltaCumulativeLapTime < overtakingThreshold) {
-				/*
-				TODO use overtaking probability to decide whether the overtake occurs or not
-				TODO if overtake is successful: cars change positions (use setPosition) and both receive time penalty (added to cumulative
-				 lap time)
-				 */
+			if (deltaCumulativeLapTime < overtakingThreshold && new Random().nextInt(100) < overtakingProbability) {
+				drivers.get(i + 1).setPosition(actualPos);
+				drivers.get(i + 1).setTotalRaceTime(drivers.get(i + 1).getTotalRaceTime() + OVERTAKING_PENALTY);
+				drivers.get(i).setPosition(actualPos + 1);
+				drivers.get(i).setTotalRaceTime(drivers.get(i).getTotalRaceTime() + OVERTAKING_PENALTY);
 			}
 			else if (deltaCumulativeLapTime < DRS_THRESHOLD) {
 				/*

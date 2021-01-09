@@ -1,6 +1,8 @@
 package Models;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 import static Models.GlobalInfo.*;
 import Circuits.*;
@@ -39,11 +41,16 @@ public class RaceModel {
 	}
 
 	public void simulateRace() {
+		// establish starting grid
+		setGridPositions();
+
+		// simulate actual race (laps)
 		for(int i = 1; i <= numTotalLaps; i++){
 			simulateLapTimes(i);
 
 		}
 
+		// final sort
 		Collections.sort(drivers);
 		System.out.println("Race Results:");
 		for(int i = 1; i <= drivers.size(); i++){
@@ -61,6 +68,15 @@ public class RaceModel {
 	}
 
 	private void simulateOvertakes(){
+		// use OvertakingModel
+	}
 
+	private void setGridPositions() {
+		// sort drivers according to quali time
+		Collections.sort(drivers, Comparator.comparingDouble(Driver::getQualiTime));
+		// now that the list of drivers is sorted, explicitly assign starting grid position
+		for(int i = 1; i <= drivers.size(); i++){
+			drivers.get(i).setPosition(i);
+		}
 	}
 }

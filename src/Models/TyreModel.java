@@ -19,6 +19,7 @@ public class TyreModel {
 		double residual = driver.getTyreCoeff(currCompound, 0) + (driver.getTyreCoeff(currCompound, 1) * driver.getTyreAge())
 				+ (driver.getTyreCoeff(currCompound, 2) * Math.pow(driver.getTyreAge(), 2)) + generateRandom();
 		return residual;
+
 	}
 
 

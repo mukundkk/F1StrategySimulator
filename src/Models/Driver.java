@@ -210,7 +210,7 @@ public class Driver implements Comparable<Driver>{
 	}
 
 	public int compareTo(Driver otherDriver){
-		return Double.compare(totalRaceTime, otherDriver.getTotalRaceTime());
+		return Integer.compare(getPosition(), otherDriver.getPosition());
 	}
 
 	public int getPosition() {
