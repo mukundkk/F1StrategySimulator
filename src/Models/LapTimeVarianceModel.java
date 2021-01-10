@@ -1,5 +1,7 @@
 package Models;
 
+import static Models.GlobalInfo.*;
+
 public class LapTimeVarianceModel {
 	FuelModel fuelModel;
 	TyreModel tyreModel;
@@ -13,7 +15,9 @@ public class LapTimeVarianceModel {
 
 	public double simulateLapTime(){
 		double lapTime = driver.getQualiTime() + fuelModel.correctLapTime() + tyreModel.calcResidual();
+		if(driver.DRSBonusActive()) lapTime += DRS_BONUS;
 		driver.setCorrectedLapTime(lapTime);
+		driver.setDRSBonus(false);
 		return lapTime;
 	}
 

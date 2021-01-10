@@ -1,6 +1,5 @@
 package Models;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -47,7 +46,7 @@ public class RaceModel {
 		// simulate actual race (laps)
 		for(int i = 1; i <= numTotalLaps; i++){
 			simulateLapTimes(i);
-
+			overtakingModel.simulateOvertakes(i);
 		}
 
 		// final sort
@@ -65,10 +64,6 @@ public class RaceModel {
 			driver.setTotalRaceTime(driver.getTotalRaceTime() + driver.getCorrectedLapTime());
 			Collections.sort(drivers);
 		}
-	}
-
-	private void simulateOvertakes(){
-		// use OvertakingModel
 	}
 
 	private void setGridPositions() {

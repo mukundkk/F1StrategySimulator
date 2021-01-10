@@ -21,6 +21,8 @@ public class Driver implements Comparable<Driver>{
 	int tyreAge;
 	double stddev;
 
+	boolean DRSBonus;
+
 	String name;
 
 	LapTimeVarianceModel lapTimeModel;
@@ -38,6 +40,7 @@ public class Driver implements Comparable<Driver>{
 		this.stddev = stddev;
 		this.name = name;
 		totalRaceTime = 0;
+		DRSBonus = false;
 	}
 
 	public int getLapNumber() {
@@ -68,6 +71,7 @@ public class Driver implements Comparable<Driver>{
 		this.correctedLapTime = correctedLapTime;
 	}
 
+	// Note: this method should only be used ONCE in the entire project (in RaceModel to simulate lap times)
 	public double getCorrectedLapTime() {
 		return lapTimeModel.simulateLapTime();
 	}
@@ -219,5 +223,13 @@ public class Driver implements Comparable<Driver>{
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	public boolean DRSBonusActive() {
+		return DRSBonus;
+	}
+
+	public void setDRSBonus(boolean DRSBonus) {
+		this.DRSBonus = DRSBonus;
 	}
 }

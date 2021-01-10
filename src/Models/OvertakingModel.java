@@ -57,10 +57,7 @@ public class OvertakingModel {
 				drivers.get(i).setTotalRaceTime(drivers.get(i).getTotalRaceTime() + OVERTAKING_PENALTY);
 			}
 			else if (deltaCumulativeLapTime < DRS_THRESHOLD) {
-				/*
-				TODO trailing car (i + 1) gets DRS bonus in the next lap (maybe have a boolean attribute in the Driver class that mentions whether
-				 or not it will get a bonus on the next lap (but remember to toggle off as needed)
-				 */
+				drivers.get(i + 1).setDRSBonus(true);
 			}
 			/*
 			- If the trailing car is not faster, and does not receive the DRS bonus either, nothing happens and the cars retain their
