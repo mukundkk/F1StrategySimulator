@@ -66,6 +66,10 @@ public class OvertakingModel {
 			 means that after adding or subtracting times as needed, make sure the gap between every car is no less than the minimum time
 			 difference as specified in the Models.GlobalInfo class.
 			 */
+//			deltaCumulativeLapTime = drivers.get(i + 1).getTotalRaceTime() - drivers.get(i).getTotalRaceTime();
+//			if (Math.abs(deltaCumulativeLapTime) < MIN_TIME_DIFFERENCE) {
+//
+//			}
 		}
 	}
 }

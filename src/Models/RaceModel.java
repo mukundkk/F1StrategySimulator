@@ -40,6 +40,9 @@ public class RaceModel {
 	}
 
 	public void simulateRace() {
+		// initialize driver profiles
+		setupRace();
+
 		// establish starting grid
 		setGridPositions();
 
