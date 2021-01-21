@@ -3,17 +3,18 @@ package Models;
 public class Driver implements Comparable<Driver>{
 	int lapNumber;
 	double qualiTime;
+	int qualiPosition;
 	double currentLapTime;
 	double correctedLapTime;
 	double fuelRemaining;
 	double residualLapTime;
 	double fuelCoefficientZero;
 	double fuelCoefficientOne;
-	double[] c5coeffs;
+	double[] c5coeffs; // softest tyres
 	double[] c4coeffs;
 	double[] c3coeffs;
 	double[] c2coeffs;
-	double[] c1coeffs;
+	double[] c1coeffs; // hardest tyres
 
 	double totalRaceTime;
 
@@ -41,6 +42,7 @@ public class Driver implements Comparable<Driver>{
 		this.name = name;
 		totalRaceTime = 0;
 		DRSBonus = false;
+		lapTimeModel = new LapTimeVarianceModel(this);
 	}
 
 	public int getLapNumber() {
@@ -204,8 +206,9 @@ public class Driver implements Comparable<Driver>{
 		this.totalRaceTime = totalRaceTime;
 	}
 
-	public void init(double qualiTime){
+	public void init(double qualiTime, int qualiPosition){
 		setQualiTime(qualiTime);
+		setQualiPosition(qualiPosition);
 		lapTimeModel = new LapTimeVarianceModel(this);
 	}
 
@@ -231,5 +234,13 @@ public class Driver implements Comparable<Driver>{
 
 	public void setDRSBonus(boolean DRSBonus) {
 		this.DRSBonus = DRSBonus;
+	}
+
+	public int getQualiPosition() {
+		return qualiPosition;
+	}
+
+	public void setQualiPosition(int qualiPosition) {
+		this.qualiPosition = qualiPosition;
 	}
 }

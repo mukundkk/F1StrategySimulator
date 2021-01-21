@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class GlobalInfo {
+	public static int totalLaps;
 	public static final int DEFAULT_NUM_LAPS = 55;
 
 	public static final double DRS_THRESHOLD = 1.0;
@@ -39,8 +40,33 @@ public class GlobalInfo {
 			new double[]{-0.142, -0.013, 0}, new double[]{1.006, 0.005, 0}, new double[]{0.729, -0.099, 0}, 1.085, "Nico Hülkenberg");
 	public static Driver sPerez = new Driver(5.313, 0.022, new double[]{-1.334, -0.273, 0}, new double[]{-0.850, -0.034, 0},
 			new double[]{0.046, -0.025, 0}, new double[]{0.681, 0.021, 0}, new double[]{-0.212, -0.014, 0}, 1.560, "Sergio Pérez");
+	public static Driver kMagnussen = new Driver (4.479, 0.025, new double[]{-0.573, -0.020, 0}, new double[]{-0.982, 0.084, 0},
+			new double[]{0.137, -0.039, 0}, new double[]{1.302, -0.020, 0}, new double[]{0.826, 0.091, 0}, 1.230, "Kevin Magnussen");
+	public static Driver jPalmer = new Driver(4.685, 0.025, new double[]{-0.615, -0.146, 0}, new double[]{-0.690, 0.015},
+			new double[]{-0.299, -0.007, 0}, new double[]{0.540, 0.023, 0}, new double[]{0.276, 0.041, 0}, 1.429, "Jolyon Palmer");
+	public static Driver dKvyat = new Driver(5.167, 0.025, new double[]{-0.147, -0.081, 0}, new double[]{-0.700, 0.041, 0},
+			new double[]{-0.496, 0.014, 0}, new double[]{0.840, -0.029, 0}, new double[]{0.316, 0.009, 0}, 1.365, "Daniil Kvyat");
+	public static Driver cSainz = new Driver(5.070, 0.024, new double[]{0.939, -0.203, 0}, new double[]{-0.237, 0.021, 0},
+			new double[]{-0.056, -0.040, 0}, new double[]{0.982, 0.026, 0}, new double[]{-0.284, 0.045, 0}, 1.491, "Carlos Sainz");
+	public static Driver mEricsson = new Driver(4.552, 0.024, new double[]{-0.628, 0.154, 0}, new double[]{-0.324, -0.026, 0},
+			new double[]{-0.090, -0.013, 0}, new double[]{0.322, 0.039, 0}, new double[]{-0.903, 0.043, 0}, 1.435, "Marcus Ericsson");
+	public static Driver fNasr = new Driver(4.531, 0.023, new double[]{-2.757, 0.328, 0}, new double[]{-0.174, -0.010, 0},
+			new double[]{-0.280, -0.026, 0}, new double[]{0.697, 0.020, 0}, new double[]{0.437, 0.004, 0}, 1.474, "Felipe Nasr");
+	public static Driver fAlonso = new Driver(4.765, 0.024, new double[]{0.934, -0.090, 0}, new double[]{0.325, 0.005, 0},
+			new double[]{-0.445, -0.001, 0}, new double[]{0.565, 0.012, 0}, new double[]{-0.823, -0.102, 0}, 1.488, "Fernando Alonso");
+	public static Driver jButton = new Driver(4.598, 0.030, new double[]{-1.666, 0.116, 0}, new double[]{-0.247, 0.028, 0},
+			new double[]{-0.247, -0.040, 0}, new double[]{0.323, 0.043, 0}, new double[]{0.899, -0.002, 0}, 1.285, "Jenson Button");
+	public static Driver pWehrlein = new Driver(4.551, 0.020, new double[]{0.163, 0.002, 0}, new double[]{-1.256, 0.121, 0},
+			new double[]{-0.327, -0.004, 0}, new double[]{-0.246, 0.103, 0}, new double[]{0.218, 0.030, 0}, 1.346, "Pascal Wehrlein");
+	public static Driver eOcon = new Driver(4.757, 0.023, new double[]{1.582, -0.139, 0}, new double[]{-0.694, -0.015, 0},
+			new double[]{-1.140, 0.034, 0}, new double[]{-0.233, 0.122, 0}, new double[]{0.126, 0.053, 0}, 1.627, "Esteban Ocon");
+	public static Driver rGrosjean = new Driver(4.249, 0.029, new double[]{-1.863, 0.101, 0}, new double[]{-0.317, 0.022, 0},
+			new double[]{0.464, -0.031, 0}, new double[]{0.167, -0.009, 0}, new double[]{0.200, 0.05, 0}, 1.316, "Romain Grosjean");
+	public static Driver eGutierrez = new Driver(4.777, 0.028, new double[]{0.617, -0.037, 0}, new double[]{-0.959, 0.018, 0},
+			new double[]{-0.852, 0.049, 0}, new double[]{1.015, 0.002, 0}, new double[]{1.732, -0.038, 0}, 1.474, "Esteban Gutiérrez");
 
 	public static void setupRace() {
-		Collections.addAll(drivers, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez);
+		Collections.addAll(drivers, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez,
+				kMagnussen, jPalmer, dKvyat, cSainz, mEricsson, fNasr, fAlonso, jButton, pWehrlein, eOcon, rGrosjean, eGutierrez);
 	}
 }

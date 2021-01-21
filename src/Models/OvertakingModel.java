@@ -46,7 +46,7 @@ public class OvertakingModel {
 		overtakingProbability *= 100;
 	}
 
-	public void simulateOvertakes(int lapNum){
+	public void simulateOvertakes(){
 		for(int i = 0; i < drivers.size() - 1; i++) {
 			int actualPos = i + 1;
 			double deltaCumulativeLapTime = drivers.get(i + 1).getTotalRaceTime() - drivers.get(i).getTotalRaceTime();
