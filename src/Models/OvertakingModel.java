@@ -59,17 +59,15 @@ public class OvertakingModel {
 			else if (deltaCumulativeLapTime < DRS_THRESHOLD) {
 				drivers.get(i + 1).setDRSBonus(true);
 			}
-			/*
-			- If the trailing car is not faster, and does not receive the DRS bonus either, nothing happens and the cars retain their
-			positions
-			TODO consider car before the trailing & leading car (i + 2) when correcting cumulative lap times for minimum time difference: this
-			 means that after adding or subtracting times as needed, make sure the gap between every car is no less than the minimum time
-			 difference as specified in the Models.GlobalInfo class.
-			 */
-//			deltaCumulativeLapTime = drivers.get(i + 1).getTotalRaceTime() - drivers.get(i).getTotalRaceTime();
-//			if (Math.abs(deltaCumulativeLapTime) < MIN_TIME_DIFFERENCE) {
-//
-//			}
+			// If the trailing car is not faster, and does not receive the DRS bonus either, nothing happens and the cars retain their positions
+		}
+
+		for (int i = 0; i < drivers.size() - 1; i++){
+			double deltaCumulativeLapTime = drivers.get(i).getTotalRaceTime() - drivers.get(i + 1).getTotalRaceTime();
+			if (deltaCumulativeLapTime > 0) {
+				double differenceScalar = (drivers.get(i + 1).getTotalRaceTime() / drivers.get(i + 1).getLapNumber()) / (55 + new Random().nextInt(65 - 55 + 1));
+				drivers.get(i + 1).setTotalRaceTime(drivers.get(i + 1).getTotalRaceTime() + deltaCumulativeLapTime + (differenceScalar * MIN_TIME_DIFFERENCE));
+			}
 		}
 	}
 }

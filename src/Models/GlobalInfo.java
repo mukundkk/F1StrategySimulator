@@ -12,7 +12,7 @@ public class GlobalInfo {
 	public static final double DRS_THRESHOLD = 1.0;
 	public static final double DRS_BONUS = -0.5;
 	public static final double OVERTAKING_PENALTY = 0.5;
-	public static final double MIN_TIME_DIFFERENCE = 0.2;
+	public static final double MIN_TIME_DIFFERENCE = 0.05;
 
 	public static final double DEFAULT_OVERTAKING_THRESHOLD = -1.7;
 	public static final double DEFAULT_OVERTAKING_PROBABILITY = 0.15;
