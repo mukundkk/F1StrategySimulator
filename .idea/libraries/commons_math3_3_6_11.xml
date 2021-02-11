@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="commons-math3-3.6.11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Library/Application Support/Google/AndroidStudio4.1/plugins/road-runner-plugin/lib/commons-math3-3.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
