@@ -1,0 +1,36 @@
+Evaluation/OvertakingEvaluation.java
+ Evaluation.OvertakingEvaluation
+Evaluation/NetEvaluation.java
+ Evaluation.NetEvaluation
+Models/TyreModel.java
+ Models.TyreModel
+Models/Driver.java
+ Models.Driver
+Evaluation/RaceTimeEvaluation.java
+ Evaluation.RaceTimeEvaluation
+Models/LapTimeVarianceModel.java
+ Models.LapTimeVarianceModel
+Models/FuelModel.java
+ Models.FuelModel
+Circuits/US.java
+ Circuits.US
+Models/RaceModel.java
+ Models.RaceModel
+Models/LapOneModel.java
+ Models.LapOneModel
+Circuits/Mexico.java
+ Circuits.Mexico
+Evaluation/PositionEvaluation.java
+ Evaluation.PositionEvaluation
+Circuits/Japan.java
+ Circuits.Japan
+Models/DNFModel.java
+ Models.DNFModel
+Models/OvertakingModel.java
+ Models.OvertakingModel
+Models/GlobalInfo.java
+ Models.GlobalInfo
+Circuits/AbuDhabi.java
+ Circuits.AbuDhabi
+Models/PitStrategyModel.java
+ Models.PitStrategyModel

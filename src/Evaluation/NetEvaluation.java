@@ -1,7 +1,6 @@
 package Evaluation;
 
 import Models.*;
-import Circuits.*;
 
 public class NetEvaluation {
 
