@@ -16,6 +16,7 @@ public class ResultsWriter {
 
 	public void getInfo(){
 		Scanner sc;
+
 		try {
 			sc = new Scanner(System.in);
 
