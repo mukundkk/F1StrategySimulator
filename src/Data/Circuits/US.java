@@ -1,4 +1,4 @@
-package Circuits;
+package Data.Circuits;
 
 public class US {
 	public static final int NUM_LAPS = 56;

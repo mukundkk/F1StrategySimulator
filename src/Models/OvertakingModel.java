@@ -1,14 +1,14 @@
 package Models;
 
 
-import Circuits.AbuDhabi;
-import Circuits.Japan;
-import Circuits.Mexico;
-import Circuits.US;
+import Data.Circuits.AbuDhabi;
+import Data.Circuits.Japan;
+import Data.Circuits.Mexico;
+import Data.Circuits.US;
 
 import java.util.Random;
 
-import static Models.GlobalInfo.*;
+import static Data.GlobalInfo.*;
 
 public class OvertakingModel {
 	/*

@@ -1,5 +1,7 @@
 package Models;
 
+import Data.GlobalInfo;
+
 public class FuelModel {
 
 	Driver driver;

@@ -1,6 +1,6 @@
 package Models;
 
-import static Models.GlobalInfo.*;
+import static Data.GlobalInfo.*;
 
 public class LapTimeVarianceModel {
 	FuelModel fuelModel;

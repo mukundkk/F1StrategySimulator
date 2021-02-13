@@ -1,4 +1,4 @@
-package Circuits;
+package Data.Circuits;
 
 public class AbuDhabi {
 	public static final int NUM_LAPS = 55;

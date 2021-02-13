@@ -3,8 +3,8 @@ package Models;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static Models.GlobalInfo.*;
-import Circuits.*;
+import static Data.GlobalInfo.*;
+import Data.Circuits.*;
 
 public class RaceModel {
 	/*
