@@ -215,6 +215,10 @@ public class Driver implements Comparable<Driver>{
 		return name;
 	}
 
+	public String getLastName() {
+		return name.split(" ")[1];
+	}
+
 	public int compareTo(Driver otherDriver){
 		return Integer.compare(getPosition(), otherDriver.getPosition());
 	}

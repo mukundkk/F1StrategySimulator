@@ -4,13 +4,12 @@ import Data.GlobalInfo;
 import Models.Driver;
 import com.github.cliftonlabs.json_simple.JsonObject;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ResultsWriter {
@@ -27,10 +26,8 @@ public class ResultsWriter {
 
 	// should always be run before using writeToFile()
 	public void getInfo(){
-		Scanner sc;
 
-		try {
-			sc = new Scanner(System.in);
+		try (Scanner sc = new Scanner(System.in)){
 
 			// get circuit name
 			System.out.println("Which circuit is this for (country name)?");
@@ -58,11 +55,50 @@ public class ResultsWriter {
 
 	// write info for given race to JSON file
 	public void writeToFile(boolean trainingSet){
+		String trainingDir = "src/Data/Training/";
+		String testDir = "src/Data/Test/";
+		String filename = circuit + ".json";
 		// check if file exists in training or test set, depending on selected option
-		if (Files.exists(Paths.get(trainingSet ? "src/Data/Training/" + circuit + ".json" : "src/Data/Test/" + circuit + ".json"))) {
-
+		String path = trainingSet ? trainingDir + filename : testDir + filename;
+		if (Files.exists(Paths.get(path))) {
+			// ask user if they want to overwrite existing file
+			System.out.println("The file for " + circuit + " already exists. Do you want to overwrite it? (y/n)");
+			try (Scanner sc = new Scanner(System.in)){
+				if (sc.nextLine().equalsIgnoreCase("y")) {
+					// overwrite file
+					File results = new File(path);
+					writeToJSON(results);
+				} else {
+					System.exit(0);
+				}
+			} catch (Exception E) {
+				System.out.println("Invalid input");
+			}
 		} else {
+			// create new file and write to it
+			File results = new File(path);
+			writeToJSON(results);
+		}
+	}
 
+	private void writeToJSON(File file) {
+
+		// main JSON object
+		JsonObject json = new JsonObject();
+
+		try (FileWriter fw = new FileWriter(file)) {
+			for (int i = 0; i < driverList.size(); i++) {
+				Driver driver = driverList.get(i);
+
+				// nested JSON object for each driver
+				JsonObject driverObj = new JsonObject();
+				driverObj.put("qualiPosition", qualiPositions[i]);
+				driverObj.put("DNF", dnfStatus[i]);
+				driverObj.put("racePosition", racePositions[i]);
+				json.put(driver.getLastName(), driverObj);
+			}
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

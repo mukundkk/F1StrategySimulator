@@ -28,7 +28,7 @@ public class GlobalInfo {
 	public static Driver sVettel = new Driver(5.180, 0.018, new double[]{-1.19, 0.126, 0}, new double[]{-0.508, -0.008, 0},
 			new double[]{0.130, -0.012, 0}, new double[]{0.704, 0.039, 0}, new double[]{0, 0, 0}, 1.394, "Sebastian Vettel");
 	public static Driver kRaikkonen = new Driver(4.890, 0.022, new double[]{-0.524, 0.087, 0}, new double[]{-0.101, -0.031, 0},
-			new double[]{0.326, -0.049, 0}, new double[]{0.765, 0.040, 0}, new double[]{0.077, 0.055, 0}, 1.243, "Kimi Räikkönen");
+			new double[]{0.326, -0.049, 0}, new double[]{0.765, 0.040, 0}, new double[]{0.077, 0.055, 0}, 1.243, "Kimi Raikkonen");
 	public static Driver dRicciardo = new Driver(4.921, 0.026, new double[]{-2.036, -0.006, 0}, new double[]{-0.292, 0.029, 0},
 			new double[]{0.234, -0.037, 0}, new double[]{0.581, 0.004, 0}, new double[]{-0.018, 0.034, 0}, 1.239, "Daniel Ricciardo");
 	public static Driver mVerstappen = new Driver(5.080, 0.020, new double[]{-1.962, 0.020, 0}, new double[]{0.067, 0.032, 0},
@@ -38,9 +38,9 @@ public class GlobalInfo {
 	public static Driver vBottas = new Driver(5.493, 0.022, new double[]{-0.977, -0.107, 0}, new double[]{-0.405, 0.029, 0},
 			new double[]{-0.086, -0.025, 0}, new double[]{0.761, 0.030, 0}, new double[]{0.078, -0.056, 0}, 1.446, "Valtteri Bottas");
 	public static Driver nHulkenberg = new Driver(4.854, 0.026, new double[]{-1.898, 0.045, 0}, new double[]{-0.621, -0.031, 0},
-			new double[]{-0.142, -0.013, 0}, new double[]{1.006, 0.005, 0}, new double[]{0.729, -0.099, 0}, 1.085, "Nico Hülkenberg");
+			new double[]{-0.142, -0.013, 0}, new double[]{1.006, 0.005, 0}, new double[]{0.729, -0.099, 0}, 1.085, "Nico Hulkenberg");
 	public static Driver sPerez = new Driver(5.313, 0.022, new double[]{-1.334, -0.273, 0}, new double[]{-0.850, -0.034, 0},
-			new double[]{0.046, -0.025, 0}, new double[]{0.681, 0.021, 0}, new double[]{-0.212, -0.014, 0}, 1.560, "Sergio Pérez");
+			new double[]{0.046, -0.025, 0}, new double[]{0.681, 0.021, 0}, new double[]{-0.212, -0.014, 0}, 1.560, "Sergio Perez");
 	public static Driver kMagnussen = new Driver (4.479, 0.025, new double[]{-0.573, -0.020, 0}, new double[]{-0.982, 0.084, 0},
 			new double[]{0.137, -0.039, 0}, new double[]{1.302, -0.020, 0}, new double[]{0.826, 0.091, 0}, 1.230, "Kevin Magnussen");
 	public static Driver jPalmer = new Driver(4.685, 0.025, new double[]{-0.615, -0.146, 0}, new double[]{-0.690, 0.015},
@@ -64,7 +64,7 @@ public class GlobalInfo {
 	public static Driver rGrosjean = new Driver(4.249, 0.029, new double[]{-1.863, 0.101, 0}, new double[]{-0.317, 0.022, 0},
 			new double[]{0.464, -0.031, 0}, new double[]{0.167, -0.009, 0}, new double[]{0.200, 0.05, 0}, 1.316, "Romain Grosjean");
 	public static Driver eGutierrez = new Driver(4.777, 0.028, new double[]{0.617, -0.037, 0}, new double[]{-0.959, 0.018, 0},
-			new double[]{-0.852, 0.049, 0}, new double[]{1.015, 0.002, 0}, new double[]{1.732, -0.038, 0}, 1.474, "Esteban Gutiérrez");
+			new double[]{-0.852, 0.049, 0}, new double[]{1.015, 0.002, 0}, new double[]{1.732, -0.038, 0}, 1.474, "Esteban Gutierrez");
 
 	public static void setupRace() {
 		Collections.addAll(drivers, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez,
