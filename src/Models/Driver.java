@@ -106,8 +106,7 @@ public class Driver implements Comparable<Driver>{
 		this.tyreAge = tyreAge;
 	}
 
-
-
+	// get correct tyre coefficient for corresponding compound
 	public double getTyreCoeff(int compound, int cfNum){
 		double coeff = 0;
 		switch(compound){

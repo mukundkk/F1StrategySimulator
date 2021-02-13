@@ -47,6 +47,8 @@ public class OvertakingModel {
 	}
 
 	public void simulateOvertakes(){
+
+		// go through each driver pair and check for overtaking actions (add penalty if action is taken)
 		for(int i = 0; i < drivers.size() - 1; i++) {
 			int actualPos = i + 1;
 			double deltaCumulativeLapTime = drivers.get(i + 1).getTotalRaceTime() - drivers.get(i).getTotalRaceTime();
@@ -62,6 +64,7 @@ public class OvertakingModel {
 			// If the trailing car is not faster, and does not receive the DRS bonus either, nothing happens and the cars retain their positions
 		}
 
+		// make sure gap between drivers does not go below minimum difference
 		for (int i = 0; i < drivers.size() - 1; i++){
 			double deltaCumulativeLapTime = drivers.get(i).getTotalRaceTime() - drivers.get(i + 1).getTotalRaceTime();
 			if (deltaCumulativeLapTime > 0) {

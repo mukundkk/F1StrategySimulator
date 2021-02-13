@@ -13,6 +13,7 @@ public class LapTimeVarianceModel {
 		tyreModel = new TyreModel(driver);
 	}
 
+	// combine fuel and tyre models with base time (and DRS if applicable) to get overall lap time
 	public double simulateLapTime(){
 		double lapTime = driver.getQualiTime() + fuelModel.correctLapTime() + tyreModel.calcResidual();
 		if(driver.DRSBonusActive()) lapTime += DRS_BONUS;

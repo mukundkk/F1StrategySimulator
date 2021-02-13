@@ -70,4 +70,11 @@ public class GlobalInfo {
 		Collections.addAll(drivers, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez,
 				kMagnussen, jPalmer, dKvyat, cSainz, mEricsson, fNasr, fAlonso, jButton, pWehrlein, eOcon, rGrosjean, eGutierrez);
 	}
+
+	public static ArrayList<Driver> getDriverList() {
+		ArrayList<Driver> tempList = new ArrayList<>();
+		Collections.addAll(tempList, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez,
+				kMagnussen, jPalmer, dKvyat, cSainz, mEricsson, fNasr, fAlonso, jButton, pWehrlein, eOcon, rGrosjean, eGutierrez);
+		return tempList;
+	}
 }
