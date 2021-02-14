@@ -8,6 +8,7 @@ import com.github.cliftonlabs.json_simple.Jsoner;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class ResultsReader {
 		this.circuit = circuit;
 		driverList = GlobalInfo.getDriverList();
 		this.trainingSet = trainingSet;
+		qualiPositions = new int[driverList.size()];
+		racePositions = new int[driverList.size()];
+		dnfStatus = new boolean[driverList.size()];
 		readFile();
 	}
 
@@ -39,12 +43,12 @@ public class ResultsReader {
 				for(int i = 0; i < driverList.size(); i++) {
 					Driver driver = driverList.get(i);
 					JsonObject driverObj = (JsonObject) parser.get(driver.getLastName());
-					qualiPositions[i] = (int) driverObj.get("qualiPosition");
+					qualiPositions[i] = ((BigDecimal) (driverObj.get("qualiPosition"))).intValue();
 					dnfStatus[i] = (boolean) driverObj.get("DNF");
-					racePositions[i] = (int) driverObj.get("racePosition");
+					racePositions[i] = ((BigDecimal) driverObj.get("racePosition")).intValue();
 				}
 			} catch (IOException | JsonException e) {
-				System.out.println(e.getMessage());
+				e.printStackTrace();
 			}
 		} else {
 			System.out.println("The file for " + circuit + " could not be found.");
@@ -52,15 +56,15 @@ public class ResultsReader {
 	}
 
 	public int getQualiPosition(String lastName) {
-		return getDriverIndex(lastName) > 0 ? qualiPositions[getDriverIndex(lastName)] : -1;
+		return getDriverIndex(lastName) >= 0 ? qualiPositions[getDriverIndex(lastName)] : -1;
 	}
 
 	public boolean didDNF(String lastName) {
-		return getDriverIndex(lastName) > 0 ? dnfStatus[getDriverIndex(lastName)] : false;
+		return getDriverIndex(lastName) >= 0 ? dnfStatus[getDriverIndex(lastName)] : false;
 	}
 
 	public int getRacePosition(String lastName) {
-		return getDriverIndex(lastName) > 0 ? racePositions[getDriverIndex(lastName)] : -1;
+		return getDriverIndex(lastName) >= 0 ? racePositions[getDriverIndex(lastName)] : -1;
 	}
 
 	private int getDriverIndex(String lastName) {
