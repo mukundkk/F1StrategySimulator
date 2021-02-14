@@ -3,6 +3,7 @@ package FileIO;
 import Data.GlobalInfo;
 import Models.Driver;
 import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -97,6 +98,9 @@ public class ResultsWriter {
 				driverObj.put("racePosition", racePositions[i]);
 				json.put(driver.getLastName(), driverObj);
 			}
+
+			// write to file
+			Jsoner.serialize(json, fw);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
