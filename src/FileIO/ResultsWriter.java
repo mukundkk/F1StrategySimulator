@@ -26,7 +26,7 @@ public class ResultsWriter {
 	}
 
 	// should always be run before using writeToFile()
-	public void getInfo(){
+	private void getInfo(){
 
 		try (Scanner sc = new Scanner(System.in)){
 
@@ -56,6 +56,7 @@ public class ResultsWriter {
 
 	// write info for given race to JSON file
 	public void writeToFile(boolean trainingSet){
+		getInfo();
 		String trainingDir = "src/Data/Training/";
 		String testDir = "src/Data/Test/";
 		String filename = circuit + ".json";
