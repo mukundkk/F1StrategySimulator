@@ -58,8 +58,31 @@ public class ResultsWriter {
 		}
 	}
 
+	public void askForData() {
+		boolean loop = false;
+		try (Scanner sc1 = new Scanner(System.in);) {
+			System.out.println("Should this race be part of the training set? (y/n)");
+			String wantsTraining = sc1.next();
+			boolean trainingSet = wantsTraining.equalsIgnoreCase("y");
+			do {
+				writeToFile(trainingSet);
+				System.out.println("──────────────────────────────────────────");
+				System.out.println("Would you like to enter data for another race? (y/n)");
+				String response = sc1.next();
+				loop = response.equalsIgnoreCase("y");
+				if (loop) {
+					System.out.println("Should this race be part of the training set? (y/n)");
+					wantsTraining = sc1.next();
+					trainingSet = wantsTraining.equalsIgnoreCase("y");
+				}
+			} while (loop);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// write info for given race to JSON file
-	public void writeToFile(boolean trainingSet){
+	private void writeToFile(boolean trainingSet){
 		getInfo();
 		String trainingDir = "src/Data/Training/";
 		String testDir = "src/Data/Test/";
