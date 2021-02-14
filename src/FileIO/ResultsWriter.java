@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ResultsWriter {
@@ -23,13 +24,15 @@ public class ResultsWriter {
 	public ResultsWriter() {
 		this.circuit = "";
 		driverList = GlobalInfo.getDriverList();
+		qualiPositions = new int[driverList.size()];
+		racePositions = new int[driverList.size()];
+		dnfStatus = new boolean[driverList.size()];
 	}
 
 	// should always be run before using writeToFile()
 	private void getInfo(){
 
 		try (Scanner sc = new Scanner(System.in)){
-
 			// get circuit name
 			System.out.println("Which circuit is this for (country name)?");
 			circuit = sc.nextLine();
@@ -40,7 +43,8 @@ public class ResultsWriter {
 				System.out.println("Enter " + driver.getName() + "'s qualifying position: ");
 				qualiPositions[i] = sc.nextInt();
 				System.out.println("Did " + driver.getName() + " DNF? (y/n)");
-				if (sc.nextLine().equalsIgnoreCase("y")) {
+				String didDNF = sc.next();
+				if (didDNF.equalsIgnoreCase("y")) {
 					dnfStatus[i] = true;
 					racePositions[i] = 0;
 				} else {
@@ -49,8 +53,8 @@ public class ResultsWriter {
 					racePositions[i] = sc.nextInt();
 				}
 			}
-		} catch (Exception E) {
-			System.out.println("Invalid input");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -66,15 +70,16 @@ public class ResultsWriter {
 			// ask user if they want to overwrite existing file
 			System.out.println("The file for " + circuit + " already exists. Do you want to overwrite it? (y/n)");
 			try (Scanner sc = new Scanner(System.in)){
-				if (sc.nextLine().equalsIgnoreCase("y")) {
+				String overwrite = sc.nextLine();
+				if (overwrite.equalsIgnoreCase("y")) {
 					// overwrite file
 					File results = new File(path);
 					writeToJSON(results);
 				} else {
 					System.exit(0);
 				}
-			} catch (Exception E) {
-				System.out.println("Invalid input");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} else {
 			// create new file and write to it
@@ -103,7 +108,7 @@ public class ResultsWriter {
 			// write to file
 			Jsoner.serialize(json, fw);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

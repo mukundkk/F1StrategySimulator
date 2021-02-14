@@ -12,25 +12,31 @@ Models/LapTimeVarianceModel.java
  Models.LapTimeVarianceModel
 Models/FuelModel.java
  Models.FuelModel
-Circuits/US.java
- Circuits.US
 Models/RaceModel.java
  Models.RaceModel
+Data/Circuits/Mexico.java
+ Data.Circuits.Mexico
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
 Models/LapOneModel.java
  Models.LapOneModel
-Circuits/Mexico.java
- Circuits.Mexico
 Evaluation/PositionEvaluation.java
  Evaluation.PositionEvaluation
-Circuits/Japan.java
- Circuits.Japan
+Data/Circuits/US.java
+ Data.Circuits.US
+Data/GlobalInfo.java
+ Data.GlobalInfo
 Models/DNFModel.java
  Models.DNFModel
 Models/OvertakingModel.java
  Models.OvertakingModel
-Models/GlobalInfo.java
- Models.GlobalInfo
-Circuits/AbuDhabi.java
- Circuits.AbuDhabi
+Data/Circuits/AbuDhabi.java
+ Data.Circuits.AbuDhabi
 Models/PitStrategyModel.java
  Models.PitStrategyModel
+FileIO/ResultsReader.java
+ FileIO.ResultsReader
+FileIO/IOTest.java
+ FileIO.IOTest
+FileIO/ResultsWriter.java
+ FileIO.ResultsWriter

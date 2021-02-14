@@ -1,12 +1,12 @@
 {
   "driverLastName": {
     "qualiPosition": 0,
-    "DNF": false,
-    "racePosition": 0
+    "racePosition": 0,
+    "DNF": false
   },
   "driver2LastName": {
     "qualiPosition": 0,
-    "DNF": false,
-    "racePosition": 0
+    "racePosition": 0,
+    "DNF": false
   }
 }
