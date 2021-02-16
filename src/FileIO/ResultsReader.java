@@ -34,7 +34,7 @@ public class ResultsReader {
 	private void readFile() {
 		String trainingDir = "src/Data/Training/";
 		String testDir = "src/Data/Test/";
-		String filename = circuit + ".json";
+		String filename = circuit;
 		String path = trainingSet ? trainingDir + filename : testDir + filename;
 
 		if(Files.exists(Paths.get(path))) {

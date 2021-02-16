@@ -26,8 +26,8 @@ Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
  Data.GlobalInfo
-Models/DNFModel.java
- Models.DNFModel
+FileIO/ResultsWriter.java
+ FileIO.ResultsWriter
 Models/OvertakingModel.java
  Models.OvertakingModel
 Data/Circuits/AbuDhabi.java
@@ -38,5 +38,7 @@ FileIO/ResultsReader.java
  FileIO.ResultsReader
 FileIO/IODriver.java
  FileIO.IODriver
-FileIO/ResultsWriter.java
- FileIO.ResultsWriter
+Models/DNFModel.java
+ Models.DNFModel
+Evaluation/DNFEvaluation.java
+ Evaluation.DNFEvaluation
