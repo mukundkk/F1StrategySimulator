@@ -6,6 +6,7 @@ import Data.Circuits.Japan;
 import Data.Circuits.Mexico;
 import Data.Circuits.US;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static Data.GlobalInfo.*;
@@ -19,8 +20,10 @@ public class OvertakingModel {
 	Circuit 4: Abu Dhabi
 	 */
 	double overtakingThreshold, overtakingProbability;
+	ArrayList<Driver> drivers;
 
-	public OvertakingModel(int circuit){
+	public OvertakingModel(int circuit, ArrayList<Driver> drivers){
+		this.drivers = drivers;
 		switch (circuit) {
 			case 1:
 				overtakingThreshold = Japan.OVERTAKING_THRESHOLD;
@@ -72,5 +75,9 @@ public class OvertakingModel {
 				drivers.get(i + 1).setTotalRaceTime(drivers.get(i + 1).getTotalRaceTime() + deltaCumulativeLapTime + (differenceScalar * MIN_TIME_DIFFERENCE));
 			}
 		}
+	}
+
+	public void updateDriverList(ArrayList<Driver> drivers) {
+		this.drivers = drivers;
 	}
 }

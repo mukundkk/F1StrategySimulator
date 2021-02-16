@@ -43,7 +43,7 @@ public class RaceModel {
 				totalLaps = DEFAULT_NUM_LAPS;
 				break;
 		}
-		overtakingModel = new OvertakingModel(circuit);
+		overtakingModel = new OvertakingModel(circuit, drivers);
 		dnfModel = new DNFModel();
 		this.tyreCompounds = tyreCompounds;
 		this.qualiTimes = qualiTimes;
@@ -95,6 +95,7 @@ public class RaceModel {
 		// simulate actual race (laps)
 		for(int i = 1; i <= totalLaps; i++){
 			simulateLapTimes(i);
+			overtakingModel.updateDriverList(drivers);
 			overtakingModel.simulateOvertakes();
 		}
 	}
