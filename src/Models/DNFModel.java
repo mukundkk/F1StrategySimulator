@@ -97,10 +97,16 @@ public class DNFModel {
 		return (int) (calcAvgDriverDNF(lastName) * numFiles);
 	}
 
-	public double getDNFProbability (String lastName) {
+	private double getDNFProbability (String lastName) {
 		double posteriorDistAlpha = getNumDNFs(lastName) + priorAlpha;
 		double posteriorDistBeta = numFiles - getNumDNFs(lastName) + priorBeta;
 		BetaDistribution posteriorDist = new BetaDistribution(posteriorDistAlpha, posteriorDistBeta);
 		return posteriorDist.getNumericalMean();
+	}
+
+	public void assignDNFProbability(ArrayList<Driver> drivers) {
+		for (Driver driver : drivers) {
+			driver.setDnfProbability(getDNFProbability(driver.getLastName()));
+		}
 	}
 }

@@ -18,6 +18,7 @@ public class RaceModel {
 	int[] tyreCompounds, qualiPositions;
 	double[] qualiTimes;
 	OvertakingModel overtakingModel;
+	DNFModel dnfModel;
 
 	public RaceModel(int circuit, int[] tyreCompounds, double[] qualiTimes, int[] qualiPositions) {
 		this.circuit = circuit;
@@ -39,14 +40,16 @@ public class RaceModel {
 				break;
 		}
 		overtakingModel = new OvertakingModel(circuit);
+		dnfModel = new DNFModel();
 		this.tyreCompounds = tyreCompounds;
 		this.qualiTimes = qualiTimes;
 		this.qualiPositions = qualiPositions;
 	}
 
 	public void simulateRace() {
-		// add driver profiles to main list
+		// add driver profiles to main list and set DNF probabilities for each driver
 		setupRace();
+		dnfModel.assignDNFProbability(drivers);
 
 		// for each driver, set quali time & set their initial tyre compound (for now, defaulting to hardest compound available for the race)
 		for (int i = 0; i < drivers.size(); i++) {

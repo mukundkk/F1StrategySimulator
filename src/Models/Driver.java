@@ -21,7 +21,7 @@ public class Driver implements Comparable<Driver>{
 	int tyreCompound;
 	int tyreAge;
 	double stddev;
-
+	double dnfProbability;
 	boolean DRSBonus;
 
 	String name;
@@ -245,5 +245,13 @@ public class Driver implements Comparable<Driver>{
 
 	public void setQualiPosition(int qualiPosition) {
 		this.qualiPosition = qualiPosition;
+	}
+
+	public double getDnfProbability() {
+		return dnfProbability;
+	}
+
+	public void setDnfProbability(double dnfProbability) {
+		this.dnfProbability = dnfProbability;
 	}
 }
