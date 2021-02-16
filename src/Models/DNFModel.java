@@ -2,9 +2,7 @@ package Models;
 
 import Data.GlobalInfo;
 import FileIO.ResultsReader;
-import org.apache.commons.math3.analysis.function.Sqrt;
 import org.apache.commons.math3.distribution.BetaDistribution;
-import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 
 import java.io.File;
@@ -12,19 +10,26 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class DNFModel {
-	double avgDNFFraction;
+	double meanDNF;
 	double stdDevDNF;
-	double alpha;
-	double beta;
+	double priorAlpha;
+	double priorBeta;
 	ArrayList<Driver> driverList;
+	private int numFiles;
+	private File[] trainingFiles;
 
 	public DNFModel() {
+		trainingFiles = Objects.requireNonNull(new File("src/Data/Training/").listFiles());
+		numFiles = trainingFiles.length;
 		driverList = GlobalInfo.getDriverList();
-		calcAvgTotalDNF();
+
+		calcMeanDNF();
 		calcStdDev();
+		calcPriorAlpha();
+		calcPriorBeta();
 	}
 
-	private void calcAvgTotalDNF() {
+	private void calcMeanDNF() {
 		double totalDNFFrac = 0;
 
 		// get sum of DNF fractions of all drivers
@@ -33,13 +38,11 @@ public class DNFModel {
 		}
 
 		// set average DNF fraction to sum divided by number of drivers
-		avgDNFFraction = totalDNFFrac / driverList.size();
+		meanDNF = totalDNFFrac / driverList.size();
 	}
 
 	private double calcAvgDriverDNF(String lastName) {
 		// get all files in training directory
-		File[] trainingFiles = Objects.requireNonNull(new File("src/Data/Training/").listFiles());
-		int numFiles = trainingFiles.length;
 		double numDNFs = 0;
 
 		// check how many times the given driver DNFed
@@ -58,7 +61,7 @@ public class DNFModel {
 
 	private void calcStdDev() {
 		// use average dnf fraction of all drivers as mean
-		double mean = avgDNFFraction;
+		double mean = meanDNF;
 		double[] terms = new double[driverList.size()];
 
 		// for each driver, calculate squared difference between driver DNF fraction and mean - used as term in sum
@@ -74,5 +77,30 @@ public class DNFModel {
 
 		// standard deviation is the square root of that mean
 		stdDevDNF = Math.sqrt(meanOfSum);
+	}
+
+	private void calcPriorAlpha() {
+		double term1 = (1 - meanDNF) / Math.pow(stdDevDNF, 2);
+		double term2 = 1 / meanDNF;
+		double term3 = term1 - term2;
+		priorAlpha = term3 * Math.pow(meanDNF, 2);
+	}
+
+	private void calcPriorBeta() {
+		double term1 = (1 / meanDNF) - 1;
+		priorBeta = priorAlpha * term1;
+	}
+
+	private int getNumDNFs (String lastName) {
+		File[] trainingFiles = Objects.requireNonNull(new File("src/Data/Training/").listFiles());
+		int numFiles = trainingFiles.length;
+		return (int) (calcAvgDriverDNF(lastName) * numFiles);
+	}
+
+	public double getDNFProbability (String lastName) {
+		double posteriorDistAlpha = getNumDNFs(lastName) + priorAlpha;
+		double posteriorDistBeta = numFiles - getNumDNFs(lastName) + priorBeta;
+		BetaDistribution posteriorDist = new BetaDistribution(posteriorDistAlpha, posteriorDistBeta);
+		return posteriorDist.getNumericalMean();
 	}
 }
