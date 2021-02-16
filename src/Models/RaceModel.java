@@ -1,10 +1,12 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import static Data.GlobalInfo.*;
 import Data.Circuits.*;
+import Data.GlobalInfo;
 
 public class RaceModel {
 	/*
@@ -19,9 +21,11 @@ public class RaceModel {
 	double[] qualiTimes;
 	OvertakingModel overtakingModel;
 	DNFModel dnfModel;
+	ArrayList<Driver> drivers;
 
 	public RaceModel(int circuit, int[] tyreCompounds, double[] qualiTimes, int[] qualiPositions) {
 		this.circuit = circuit;
+		drivers = GlobalInfo.getDriverList();
 		switch (circuit) {
 			case 1:
 				totalLaps = Japan.NUM_LAPS;
@@ -47,31 +51,11 @@ public class RaceModel {
 	}
 
 	public void simulateRace() {
-		// add driver profiles to main list and set DNF probabilities for each driver
-		setupRace();
-		dnfModel.assignDNFProbability(drivers);
+		initialize();
 
-		// for each driver, set quali time & set their initial tyre compound (for now, defaulting to hardest compound available for the race)
-		for (int i = 0; i < drivers.size(); i++) {
-			drivers.get(i).init(qualiTimes[i], qualiPositions[i]);
-			drivers.get(i).setTyreCompound(tyreCompounds[0]);
-		}
+		loop();
 
-		// establish starting grid
-		setGridPositions();
-
-		// simulate actual race (laps)
-		for(int i = 1; i <= totalLaps; i++){
-			simulateLapTimes(i);
-			overtakingModel.simulateOvertakes();
-		}
-
-		// final sort
-		Collections.sort(drivers);
-		System.out.println("Race Results:");
-		for(int i = 1; i <= drivers.size(); i++){
-			System.out.println(i + ". " + drivers.get(i - 1).getName());
-		}
+		stop();
 	}
 
 	private void simulateLapTimes(int lapNum){
@@ -90,6 +74,37 @@ public class RaceModel {
 		// now that the list of drivers is sorted, assign grid position using position variable (as this will be referred to in the race)
 		for(int i = 0; i < drivers.size(); i++){
 			drivers.get(i).setPosition(i + 1);
+		}
+	}
+
+	private void initialize() {
+		// set DNF probabilities for each driver
+		dnfModel.assignDNFProbability(drivers);
+
+		// for each driver, set quali time & set their initial tyre compound (for now, defaulting to hardest compound available for the race)
+		for (int i = 0; i < drivers.size(); i++) {
+			drivers.get(i).init(qualiTimes[i], qualiPositions[i]);
+			drivers.get(i).setTyreCompound(tyreCompounds[0]);
+		}
+
+		// establish starting grid
+		setGridPositions();
+	}
+
+	private void loop() {
+		// simulate actual race (laps)
+		for(int i = 1; i <= totalLaps; i++){
+			simulateLapTimes(i);
+			overtakingModel.simulateOvertakes();
+		}
+	}
+
+	private void stop() {
+		// final sort
+		Collections.sort(drivers);
+		System.out.println("Race Results:");
+		for(int i = 1; i <= drivers.size(); i++){
+			System.out.println(i + ". " + drivers.get(i - 1).getName());
 		}
 	}
 }

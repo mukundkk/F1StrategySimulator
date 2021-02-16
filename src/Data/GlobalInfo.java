@@ -19,7 +19,6 @@ public class GlobalInfo {
 	public static final double DEFAULT_OVERTAKING_PROBABILITY = 0.15;
 
 	public static int circuit;
-	public static ArrayList<Driver> drivers = new ArrayList<>();
 
 	public static Driver nRosberg = new Driver(5.595, 0.017, new double[]{0.553, 0.002, 0}, new double[]{0.035, -0.026, 0},
 			new double[]{0.076, -0.037, 0}, new double[]{0.249, 0.017, 0}, new double[]{0.035, 0.034, 0}, 1.480, "Nico Rosberg");
@@ -65,11 +64,6 @@ public class GlobalInfo {
 			new double[]{0.464, -0.031, 0}, new double[]{0.167, -0.009, 0}, new double[]{0.200, 0.05, 0}, 1.316, "Romain Grosjean");
 	public static Driver eGutierrez = new Driver(4.777, 0.028, new double[]{0.617, -0.037, 0}, new double[]{-0.959, 0.018, 0},
 			new double[]{-0.852, 0.049, 0}, new double[]{1.015, 0.002, 0}, new double[]{1.732, -0.038, 0}, 1.474, "Esteban Gutierrez");
-
-	public static void setupRace() {
-		Collections.addAll(drivers, nRosberg, lHamilton, sVettel, kRaikkonen, dRicciardo, mVerstappen, fMassa, vBottas, nHulkenberg, sPerez,
-				kMagnussen, jPalmer, dKvyat, cSainz, mEricsson, fNasr, fAlonso, jButton, pWehrlein, eOcon, rGrosjean, eGutierrez);
-	}
 
 	public static ArrayList<Driver> getDriverList() {
 		ArrayList<Driver> tempList = new ArrayList<>();
