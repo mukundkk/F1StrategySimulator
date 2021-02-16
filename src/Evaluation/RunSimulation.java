@@ -2,7 +2,7 @@ package Evaluation;
 
 import Models.*;
 
-public class NetEvaluation {
+public class RunSimulation {
 
 	public static void main(String[] args) {
 		// here, add 1) circuit number, 2) tyre compounds, 3) fastest quali times & 4) quali positions (both in this order):
