@@ -113,7 +113,7 @@ public class DNFModel {
 		for (Driver driver : drivers) {
 			driver.setDnfProbability(getDNFProbability(driver.getLastName()));
 			if (new Random().nextInt(100) < driver.getDnfProbability() * 100) {
-				int lapToRetire = new Random().nextInt(totalLaps) + 1;
+				int lapToRetire = getRandomLap();
 				dnfList.add(new Object[]{driver, lapToRetire});
 			}
 		}
@@ -133,5 +133,15 @@ public class DNFModel {
 			}
 		}
 
+	}
+
+	private int getRandomLap() {
+		ArrayList<Integer> laps = new ArrayList<>();
+		for(int i = 1; i <= totalLaps; i++) {
+			if (i == 1) for (int j = 0; j < 10; j++) laps.add(i);
+			else laps.add(i);
+		}
+		int rand = new Random().nextInt(laps.size());
+		return laps.get(rand);
 	}
 }

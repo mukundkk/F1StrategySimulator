@@ -8,8 +8,8 @@ Evaluation/RunSimulation.java
  Evaluation.RunSimulation
 Models/FuelModel.java
  Models.FuelModel
-Models/RaceModel.java
- Models.RaceModel
+FileIO/ResultsWriter.java
+ FileIO.ResultsWriter
 Data/Circuits/Mexico.java
  Data.Circuits.Mexico
 Models/LapOneModel.java
@@ -18,8 +18,8 @@ Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
  Data.GlobalInfo
-Models/DNFModel.java
- Models.DNFModel
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
 Models/OvertakingModel.java
  Models.OvertakingModel
 Data/Circuits/AbuDhabi.java
@@ -30,7 +30,7 @@ Models/PitStrategyModel.java
  Models.PitStrategyModel
 FileIO/ResultsReader.java
  FileIO.ResultsReader
-FileIO/ResultsWriter.java
- FileIO.ResultsWriter
-Data/Circuits/Japan.java
- Data.Circuits.Japan
+Models/DNFModel.java
+ Models.DNFModel
+Models/RaceModel.java
+ Models.RaceModel
