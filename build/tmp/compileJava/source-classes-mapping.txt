@@ -1,44 +1,36 @@
-Evaluation/OvertakingEvaluation.java
- Evaluation.OvertakingEvaluation
-Evaluation/NetEvaluation.java
- Evaluation.NetEvaluation
 Models/TyreModel.java
  Models.TyreModel
 Models/Driver.java
  Models.Driver
-Evaluation/RaceTimeEvaluation.java
- Evaluation.RaceTimeEvaluation
 Models/LapTimeVarianceModel.java
  Models.LapTimeVarianceModel
+Evaluation/RunSimulation.java
+ Evaluation.RunSimulation
 Models/FuelModel.java
  Models.FuelModel
 Models/RaceModel.java
  Models.RaceModel
 Data/Circuits/Mexico.java
  Data.Circuits.Mexico
-Data/Circuits/Japan.java
- Data.Circuits.Japan
 Models/LapOneModel.java
  Models.LapOneModel
-Evaluation/PositionEvaluation.java
- Evaluation.PositionEvaluation
 Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
  Data.GlobalInfo
-FileIO/ResultsWriter.java
- FileIO.ResultsWriter
+Models/DNFModel.java
+ Models.DNFModel
 Models/OvertakingModel.java
  Models.OvertakingModel
 Data/Circuits/AbuDhabi.java
  Data.Circuits.AbuDhabi
+FileIO/IODriver.java
+ FileIO.IODriver
 Models/PitStrategyModel.java
  Models.PitStrategyModel
 FileIO/ResultsReader.java
  FileIO.ResultsReader
-FileIO/IODriver.java
- FileIO.IODriver
-Models/DNFModel.java
- Models.DNFModel
-Evaluation/DNFEvaluation.java
- Evaluation.DNFEvaluation
+FileIO/ResultsWriter.java
+ FileIO.ResultsWriter
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
