@@ -6,8 +6,9 @@ import org.apache.commons.math3.distribution.BetaDistribution;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
+
+import static Data.GlobalInfo.totalLaps;
 
 public class DNFModel {
 	double meanDNF;
@@ -17,11 +18,13 @@ public class DNFModel {
 	ArrayList<Driver> driverList;
 	private int numFiles;
 	private File[] trainingFiles;
+	private ArrayList<Object[]> dnfList;
 
 	public DNFModel() {
 		trainingFiles = Objects.requireNonNull(new File("src/Data/Training/").listFiles());
 		numFiles = trainingFiles.length;
 		driverList = GlobalInfo.getDriverList();
+		dnfList = new ArrayList<>();
 
 		calcMeanDNF();
 		calcStdDev();
@@ -104,9 +107,31 @@ public class DNFModel {
 		return posteriorDist.getNumericalMean();
 	}
 
+	/* assign dnf probabilities to each driver, then check if they ever retire and if so in which lap
+	add drivers that retire to a list along with the lap in which they retire */
 	public void assignDNFProbability(ArrayList<Driver> drivers) {
 		for (Driver driver : drivers) {
 			driver.setDnfProbability(getDNFProbability(driver.getLastName()));
+			if (new Random().nextInt(100) < driver.getDnfProbability() * 100) {
+				int lapToRetire = new Random().nextInt(totalLaps) + 1;
+				dnfList.add(new Object[]{driver, lapToRetire});
+			}
 		}
+	}
+
+	// check if any drivers need to DNF this lap
+	public void checkDNFs(int lapNum, ArrayList<Driver> drivers, ArrayList<Object[]> retiredDrivers) {
+		for (Object[] arr : dnfList) {
+			if ((int) arr[1] == lapNum) {
+				// if a driver needs to DNF this lap, add the array of driver & lap to retired drivers list
+				retiredDrivers.add(arr);
+
+				// remove driver from running list
+				for (int i = 0; i < drivers.size(); i++) {
+					if (drivers.get(i).getLastName().equals(((Driver)(arr[0])).getLastName())) drivers.remove(i);
+				}
+			}
+		}
+
 	}
 }

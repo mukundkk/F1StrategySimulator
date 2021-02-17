@@ -22,10 +22,12 @@ public class RaceModel {
 	OvertakingModel overtakingModel;
 	DNFModel dnfModel;
 	ArrayList<Driver> drivers;
+	ArrayList<Object[]> retiredDrivers;
 
 	public RaceModel(int circuit, int[] tyreCompounds, double[] qualiTimes, int[] qualiPositions) {
 		this.circuit = circuit;
 		drivers = GlobalInfo.getDriverList();
+		retiredDrivers = new ArrayList<>();
 		switch (circuit) {
 			case 1:
 				totalLaps = Japan.NUM_LAPS;
@@ -94,6 +96,7 @@ public class RaceModel {
 	private void loop() {
 		// simulate actual race (laps)
 		for(int i = 1; i <= totalLaps; i++){
+			dnfModel.checkDNFs(i, drivers, retiredDrivers);
 			simulateLapTimes(i);
 			overtakingModel.updateDriverList(drivers);
 			overtakingModel.simulateOvertakes();
@@ -106,6 +109,9 @@ public class RaceModel {
 		System.out.println("Race Results:");
 		for(int i = 1; i <= drivers.size(); i++){
 			System.out.println(i + ". " + drivers.get(i - 1).getName());
+		}
+		for (Object[] retiredDriver : retiredDrivers) {
+			System.out.println("R - " + ((Driver) retiredDriver[0]).getName() + " (Lap " + retiredDriver[1] + ")");
 		}
 	}
 }
