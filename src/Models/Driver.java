@@ -110,57 +110,87 @@ public class Driver implements Comparable<Driver>{
 		switch(compound){
 			case 1:
 				switch (cfNum) {
-					case 0 -> coeff = c1coeffs[0];
-					case 1 -> coeff = c1coeffs[1];
-					case 2 -> coeff = c1coeffs[2];
-					default -> {
+					case 0:
+						coeff = c1coeffs[0];
+						break;
+					case 1:
+						coeff = c1coeffs[1];
+						break;
+					case 2:
+						coeff = c1coeffs[2];
+						break;
+					default:
 						System.out.println("Not a valid tyre coefficient");
 						System.exit(0);
-					}
+						break;
 				}
 				break;
 			case 2:
 				switch (cfNum) {
-					case 0 -> coeff = c2coeffs[0];
-					case 1 -> coeff = c2coeffs[1];
-					case 2 -> coeff = c2coeffs[2];
-					default -> {
+					case 0:
+						coeff = c2coeffs[0];
+						break;
+					case 1:
+						coeff = c2coeffs[1];
+						break;
+					case 2:
+						coeff = c2coeffs[2];
+						break;
+					default:
 						System.out.println("Not a valid tyre coefficient");
 						System.exit(0);
-					}
+						break;
 				}
 				break;
 			case 3:
 				switch (cfNum) {
-					case 0 -> coeff = c3coeffs[0];
-					case 1 -> coeff = c3coeffs[1];
-					case 2 -> coeff = c3coeffs[2];
-					default -> {
+					case 0:
+						coeff = c3coeffs[0];
+						break;
+					case 1:
+						coeff = c3coeffs[1];
+						break;
+					case 2:
+						coeff = c3coeffs[2];
+						break;
+					default:
 						System.out.println("Not a valid tyre coefficient");
 						System.exit(0);
-					}
+						break;
 				}
 				break;
 			case 4:
 				switch (cfNum) {
-					case 0 -> coeff = c4coeffs[0];
-					case 1 -> coeff = c4coeffs[1];
-					case 2 -> coeff = c4coeffs[2];
-					default -> {
+					case 0:
+						coeff = c4coeffs[0];
+						break;
+					case 1:
+						coeff = c4coeffs[1];
+						break;
+					case 2:
+						coeff = c4coeffs[2];
+						break;
+					default:
 						System.out.println("Not a valid tyre coefficient");
 						System.exit(0);
-					}
+						break;
 				}
 				break;
 			case 5:
 				switch (cfNum) {
-					case 0 -> coeff = c5coeffs[0];
-					case 1 -> coeff = c5coeffs[1];
-					case 2 -> coeff = c5coeffs[2];
-					default -> {
+					case 0:
+						coeff = c5coeffs[0];
+						break;
+					case 1:
+						coeff = c5coeffs[1];
+						break;
+					case 2:
+						coeff = c5coeffs[2];
+						break;
+					default:
 						System.out.println("Not a valid tyre coefficient");
 						System.exit(0);
-					}
+						break;
 				}
 				break;
 			default:

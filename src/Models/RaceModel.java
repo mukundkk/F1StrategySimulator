@@ -29,11 +29,21 @@ public class RaceModel {
 		drivers = GlobalInfo.getDriverList();
 		retiredDrivers = new ArrayList<>();
 		switch (circuit) {
-			case 1 -> totalLaps = Japan.NUM_LAPS;
-			case 2 -> totalLaps = US.NUM_LAPS;
-			case 3 -> totalLaps = Mexico.NUM_LAPS;
-			case 4 -> totalLaps = AbuDhabi.NUM_LAPS;
-			default -> totalLaps = DEFAULT_NUM_LAPS;
+			case 1:
+				totalLaps = Japan.NUM_LAPS;
+				break;
+			case 2:
+				totalLaps = US.NUM_LAPS;
+				break;
+			case 3:
+				totalLaps = Mexico.NUM_LAPS;
+				break;
+			case 4:
+				totalLaps = AbuDhabi.NUM_LAPS;
+				break;
+			default:
+				totalLaps = DEFAULT_NUM_LAPS;
+				break;
 		}
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		dnfModel = new DNFModel();
