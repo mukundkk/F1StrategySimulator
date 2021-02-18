@@ -18,6 +18,8 @@ public class GlobalInfo {
 	public static final double DEFAULT_OVERTAKING_THRESHOLD = -1.7;
 	public static final double DEFAULT_OVERTAKING_PROBABILITY = 0.15;
 
+	public static final double SAFETY_CAR_FACTOR = 1.2;
+
 	public static int circuit;
 
 	public static Driver nRosberg = new Driver(5.595, 0.017, new double[]{0.553, 0.002, 0}, new double[]{0.035, -0.026, 0},

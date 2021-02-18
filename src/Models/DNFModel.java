@@ -120,9 +120,13 @@ public class DNFModel {
 	}
 
 	// check if any drivers need to DNF this lap
-	public void checkDNFs(int lapNum, ArrayList<Driver> drivers, ArrayList<Object[]> retiredDrivers) {
+	public boolean checkDNFs(int lapNum, ArrayList<Driver> drivers, ArrayList<Object[]> retiredDrivers, boolean safetyCarActive) {
+		boolean deploySafetyCar = false;
 		for (Object[] arr : dnfList) {
 			if ((int) arr[1] == lapNum) {
+				// deploy safety car if there is a crash, if there isn't a safety car already out, and a 50% chance succeeds
+				deploySafetyCar = new Random().nextBoolean() && !safetyCarActive;
+
 				// if a driver needs to DNF this lap, add the array of driver & lap to retired drivers list
 				retiredDrivers.add(arr);
 
@@ -132,7 +136,7 @@ public class DNFModel {
 				}
 			}
 		}
-
+		return deploySafetyCar;
 	}
 
 	private int getRandomLap() {

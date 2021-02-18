@@ -23,9 +23,15 @@ public class RaceModel {
 	DNFModel dnfModel;
 	ArrayList<Driver> drivers;
 	ArrayList<Object[]> retiredDrivers;
+	private int safetyCarLapCounter;
+	private boolean safetyCarActive;
+	private boolean deploySafetyCar;
 
 	public RaceModel(int circuit, int[] tyreCompounds, double[] qualiTimes, int[] qualiPositions) {
 		this.circuit = circuit;
+		safetyCarActive = false;
+		deploySafetyCar = false;
+		safetyCarLapCounter = 0;
 		drivers = GlobalInfo.getDriverList();
 		retiredDrivers = new ArrayList<>();
 		switch (circuit) {
@@ -60,25 +66,6 @@ public class RaceModel {
 		stop();
 	}
 
-	private void simulateLapTimes(int lapNum){
-		// set tyre compound as needed - remember that only 3 consecutive compounds are used per race
-		// (e.g. c2, c3, c4)
-		for(Driver driver : drivers){
-			driver.setLapNumber(lapNum);
-			driver.setTyreAge(lapNum);
-			driver.setTotalRaceTime(driver.getTotalRaceTime() + driver.getCorrectedLapTime());
-		}
-		Collections.sort(drivers);
-	}
-
-	private void setGridPositions() {
-		drivers.sort(Comparator.comparingInt(Driver::getQualiPosition));
-		// now that the list of drivers is sorted, assign grid position using position variable (as this will be referred to in the race)
-		for(int i = 0; i < drivers.size(); i++){
-			drivers.get(i).setPosition(i + 1);
-		}
-	}
-
 	private void initialize() {
 		// set DNF probabilities for each driver
 		dnfModel.assignDNFProbability(drivers);
@@ -93,18 +80,59 @@ public class RaceModel {
 		setGridPositions();
 	}
 
-	private void loop() {
-		// simulate actual race (laps)
-		for(int i = 1; i <= totalLaps; i++){
-			dnfModel.checkDNFs(i, drivers, retiredDrivers);
-			simulateLapTimes(i);
-			overtakingModel.updateDriverList(drivers);
-			overtakingModel.simulateOvertakes();
+	private void setGridPositions() {
+		drivers.sort(Comparator.comparingInt(Driver::getQualiPosition));
+		// now that the list of drivers is sorted, assign grid position using position variable (as this will be referred to in the race)
+		for(int i = 0; i < drivers.size(); i++){
+			drivers.get(i).setPosition(i + 1);
 		}
 	}
 
+	private void loop() {
+		// simulate actual race (laps)
+		for(int i = 1; i <= totalLaps; i++){
+			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
+			deploySafetyCar = dnfModel.checkDNFs(i, drivers, retiredDrivers, safetyCarActive);
+
+			// pass safety car status to lap time simulator
+			simulateLapTimes(i, safetyCarActive);
+
+			// drivers cannot overtake under the safety car
+			if (!safetyCarActive) {
+				overtakingModel.updateDriverList(drivers);
+				overtakingModel.simulateOvertakes();
+			}
+
+			// see if the safety car should be active starting next lap
+			safetyCarActive = safetyCarActive || deploySafetyCar;
+
+			// if the safety car should be deployed, reset counter
+			if (deploySafetyCar) safetyCarLapCounter = 0;
+
+			// safety car only lasts for 5 laps
+			else if (safetyCarLapCounter >= 5) {
+				safetyCarActive = false;
+				safetyCarLapCounter = 0;
+			}
+
+			// keep track of how long the safety car has been active
+			if (safetyCarActive) safetyCarLapCounter++;
+		}
+	}
+
+	private void simulateLapTimes(int lapNum, boolean safetyCarActive){
+		// TODO: set tyre compound as needed - remember that only 3 consecutive compounds are used per race (e.g. c2, c3, c4)
+		for(Driver driver : drivers){
+			driver.setLapNumber(lapNum);
+			driver.setTyreAge(lapNum);
+			// if safety car is active, multiply lap times by safety car factor
+			driver.setTotalRaceTime(driver.getTotalRaceTime() + (driver.getCorrectedLapTime() * (safetyCarActive ? SAFETY_CAR_FACTOR : 1)));
+		}
+		Collections.sort(drivers);
+	}
+
 	private void stop() {
-		// final sort
+		// final sort, print out race results
 		Collections.sort(drivers);
 		System.out.println("Race Results:");
 		for(int i = 1; i <= drivers.size(); i++){
