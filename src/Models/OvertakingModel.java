@@ -25,26 +25,26 @@ public class OvertakingModel {
 	public OvertakingModel(int circuit, ArrayList<Driver> drivers){
 		this.drivers = drivers;
 		switch (circuit) {
-			case 1:
+			case 1 -> {
 				overtakingThreshold = Japan.OVERTAKING_THRESHOLD;
 				overtakingProbability = Japan.OVERTAKING_PROBABILITY;
-				break;
-			case 2:
+			}
+			case 2 -> {
 				overtakingThreshold = US.OVERTAKING_THRESHOLD;
 				overtakingProbability = US.OVERTAKING_PROBABILITY;
-				break;
-			case 3:
+			}
+			case 3 -> {
 				overtakingThreshold = Mexico.OVERTAKING_THRESHOLD;
 				overtakingProbability = Mexico.OVERTAKING_PROBABILITY;
-				break;
-			case 4:
+			}
+			case 4 -> {
 				overtakingThreshold = AbuDhabi.OVERTAKING_THRESHOLD;
 				overtakingProbability = AbuDhabi.OVERTAKING_PROBABILITY;
-				break;
-			default:
+			}
+			default -> {
 				overtakingThreshold = DEFAULT_OVERTAKING_THRESHOLD;
 				overtakingProbability = DEFAULT_OVERTAKING_PROBABILITY;
-				break;
+			}
 		}
 		overtakingProbability *= 100;
 	}

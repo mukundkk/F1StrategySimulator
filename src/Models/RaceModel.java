@@ -29,21 +29,11 @@ public class RaceModel {
 		drivers = GlobalInfo.getDriverList();
 		retiredDrivers = new ArrayList<>();
 		switch (circuit) {
-			case 1:
-				totalLaps = Japan.NUM_LAPS;
-				break;
-			case 2:
-				totalLaps = US.NUM_LAPS;
-				break;
-			case 3:
-				totalLaps = Mexico.NUM_LAPS;
-				break;
-			case 4:
-				totalLaps = AbuDhabi.NUM_LAPS;
-				break;
-			default:
-				totalLaps = DEFAULT_NUM_LAPS;
-				break;
+			case 1 -> totalLaps = Japan.NUM_LAPS;
+			case 2 -> totalLaps = US.NUM_LAPS;
+			case 3 -> totalLaps = Mexico.NUM_LAPS;
+			case 4 -> totalLaps = AbuDhabi.NUM_LAPS;
+			default -> totalLaps = DEFAULT_NUM_LAPS;
 		}
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		dnfModel = new DNFModel();
@@ -72,7 +62,7 @@ public class RaceModel {
 	}
 
 	private void setGridPositions() {
-		Collections.sort(drivers, Comparator.comparingInt(Driver::getQualiPosition));
+		drivers.sort(Comparator.comparingInt(Driver::getQualiPosition));
 		// now that the list of drivers is sorted, assign grid position using position variable (as this will be referred to in the race)
 		for(int i = 0; i < drivers.size(); i++){
 			drivers.get(i).setPosition(i + 1);
