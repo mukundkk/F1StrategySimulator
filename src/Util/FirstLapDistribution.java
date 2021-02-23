@@ -15,7 +15,7 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	public double density(double x) {
 		double[] terms = new double[gainedPositions.length];
 		for(int i = 0; i < gainedPositions.length; i++){
-			double term1 = FastMath.pow(x - new FirstLapDistributionFunction().value(x), 2);
+			double term1 = FastMath.pow(x - new FirstLapProbabilityFunction().value(x), 2);
 			double term2 = -term1 / 2;
 			terms[i] = FastMath.pow(FastMath.E, term2);
 		}
@@ -26,8 +26,7 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 
 	@Override
 	public double cumulativeProbability(double x) {
-		RombergIntegrator romberg = new RombergIntegrator();
-		return romberg.integrate(MaxEval.unlimited().getMaxEval(), new FirstLapDistributionFunction(), -Integer.MAX_VALUE, x);
+		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(), new FirstLapProbabilityFunction(), -Integer.MAX_VALUE, x);
 	}
 
 	@Override
@@ -73,7 +72,7 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 		this.gainedPositions = gainedPositions;
 	}
 
-	class FirstLapDistributionFunction implements UnivariateFunction {
+	class FirstLapProbabilityFunction implements UnivariateFunction {
 		@Override
 		public double value(double x) {
 			return (int) x == x ? getGainedPositions((int) x) : 0;
