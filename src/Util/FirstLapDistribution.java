@@ -26,12 +26,14 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 
 	@Override
 	public double cumulativeProbability(double x) {
-		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(), new FirstLapProbabilityFunction(), -Integer.MAX_VALUE, x);
+		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(), new FirstLapProbabilityFunction(), Double.NEGATIVE_INFINITY, x);
 	}
 
 	@Override
 	public double getNumericalMean() {
-		return 0;
+		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+				x -> (x * new FirstLapProbabilityFunction().value(x)),
+				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 	}
 
 	@Override
