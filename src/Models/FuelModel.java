@@ -1,6 +1,7 @@
 package Models;
 
 import Data.GlobalInfo;
+import Util.Driver;
 
 public class FuelModel {
 

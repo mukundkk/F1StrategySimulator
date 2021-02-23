@@ -1,6 +1,8 @@
 package Models;
 
+import Util.Driver;
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.util.FastMath;
 
 public class TyreModel {
 	Driver driver;
@@ -19,7 +21,7 @@ public class TyreModel {
 	public double calcResidual(){
 		int currCompound = driver.getTyreCompound();
 		return driver.getTyreCoeff(currCompound, 0) + (driver.getTyreCoeff(currCompound, 1) * driver.getTyreAge())
-				+ (driver.getTyreCoeff(currCompound, 2) * Math.pow(driver.getTyreAge(), 2)) + generateRandom();
+				+ (driver.getTyreCoeff(currCompound, 2) * FastMath.pow(driver.getTyreAge(), 2)) + generateRandom();
 	}
 
 

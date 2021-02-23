@@ -2,8 +2,10 @@ package Models;
 
 import Data.GlobalInfo;
 import FileIO.ResultsReader;
+import Util.Driver;
 import org.apache.commons.math3.distribution.BetaDistribution;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
+import org.apache.commons.math3.util.FastMath;
 
 import java.io.File;
 import java.util.*;
@@ -70,7 +72,7 @@ public class DNFModel {
 		// for each driver, calculate squared difference between driver DNF fraction and mean - used as term in sum
 		for (int i = 0; i < driverList.size(); i++) {
 			double driverDNFFrac = calcAvgDriverDNF(driverList.get(i).getLastName());
-			double term = Math.pow((driverDNFFrac - mean), 2);
+			double term = FastMath.pow((driverDNFFrac - mean), 2);
 			terms[i] = term;
 		}
 
@@ -79,14 +81,14 @@ public class DNFModel {
 		double meanOfSum = sum / driverList.size();
 
 		// standard deviation is the square root of that mean
-		stdDevDNF = Math.sqrt(meanOfSum);
+		stdDevDNF = FastMath.sqrt(meanOfSum);
 	}
 
 	private void calcPriorAlpha() {
-		double term1 = (1 - meanDNF) / Math.pow(stdDevDNF, 2);
+		double term1 = (1 - meanDNF) / FastMath.pow(stdDevDNF, 2);
 		double term2 = 1 / meanDNF;
 		double term3 = term1 - term2;
-		priorAlpha = term3 * Math.pow(meanDNF, 2);
+		priorAlpha = term3 * FastMath.pow(meanDNF, 2);
 	}
 
 	private void calcPriorBeta() {

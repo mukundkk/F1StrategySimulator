@@ -1,4 +1,4 @@
 package Models;
 
-public class LapOneModel {
+public class LapOneModel{
 }

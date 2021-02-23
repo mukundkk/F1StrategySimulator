@@ -1,4 +1,6 @@
-package Models;
+package Util;
+
+import Models.LapTimeVarianceModel;
 
 public class Driver implements Comparable<Driver>{
 	int lapNumber;

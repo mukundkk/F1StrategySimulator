@@ -1,12 +1,15 @@
 package Data;
 
-import Models.Driver;
-import org.apache.commons.math3.*;
+import Util.Driver;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class GlobalInfo {
+	public static int numTrainingRaces = Objects.requireNonNull(new File("src/Data/Training/").listFiles()).length;
+
 	public static int totalLaps;
 	public static final int DEFAULT_NUM_LAPS = 55;
 

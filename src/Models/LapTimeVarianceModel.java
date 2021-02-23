@@ -1,5 +1,7 @@
 package Models;
 
+import Util.Driver;
+
 import static Data.GlobalInfo.*;
 
 public class LapTimeVarianceModel {

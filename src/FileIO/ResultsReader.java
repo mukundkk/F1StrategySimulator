@@ -1,7 +1,7 @@
 package FileIO;
 
 import Data.GlobalInfo;
-import Models.Driver;
+import Util.Driver;
 import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
