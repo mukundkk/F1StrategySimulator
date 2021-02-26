@@ -11,6 +11,10 @@ import org.apache.commons.math3.util.FastMath;
 public class FirstLapDistribution extends AbstractRealDistribution {
 	private int[] gainedPositions;
 
+	/*
+	Probability Density Function formula: https://www.desmos.com/calculator/kptertp4f4, where g(n) is the
+	inner class FirstLapProbabilityFunction
+	 */
 	@Override
 	public double density(double x) {
 		double[] terms = new double[gainedPositions.length];
@@ -24,10 +28,15 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 		return scalar * term3;
 	}
 
+	// Cumulative Probability Function is the antiderivative of the Probability Distribution Function
 	@Override
 	public double cumulativeProbability(double x) {
 		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(), new FirstLapProbabilityFunction(), Double.NEGATIVE_INFINITY, x);
 	}
+
+	/*
+	Formulae for numerical mean and variance: https://amsi.org.au/ESA_Senior_Years/SeniorTopic4/4e/4e_2content_4.html
+	 */
 
 	@Override
 	public double getNumericalMean() {
@@ -38,7 +47,10 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 
 	@Override
 	public double getNumericalVariance() {
-		return 0;
+		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+				x -> (FastMath.pow(x - getNumericalMean(), 2) *
+						new FirstLapProbabilityFunction().value(x)),
+				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 	}
 
 	@Override
@@ -74,6 +86,9 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 		this.gainedPositions = gainedPositions;
 	}
 
+	/*
+	This class represents g(x) in the probability distribution function (PDF) given by https://www.desmos.com/calculator/kptertp4f4
+	 */
 	class FirstLapProbabilityFunction implements UnivariateFunction {
 		@Override
 		public double value(double x) {
