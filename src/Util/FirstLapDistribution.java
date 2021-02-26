@@ -7,9 +7,13 @@ import org.apache.commons.math3.optim.MaxEval;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 import org.apache.commons.math3.util.FastMath;
 
+import static Data.GlobalInfo.*;
+
 @SuppressWarnings("deprecation")
 public class FirstLapDistribution extends AbstractRealDistribution {
 	private int[] gainedPositions;
+	private static final double MAX_POSITIONS_LOST = -(getDriverList().size() - 1);
+	private static final double MAX_POSITIONS_GAINED = getDriverList().size() - 1;
 
 	/*
 	Probability Density Function formula: https://www.desmos.com/calculator/kptertp4f4, where g(n) is the
@@ -31,7 +35,8 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	// Cumulative Probability Function is the antiderivative of the Probability Distribution Function
 	@Override
 	public double cumulativeProbability(double x) {
-		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(), new FirstLapProbabilityFunction(), Double.NEGATIVE_INFINITY, x);
+		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+				new FirstLapProbabilityFunction(), Double.NEGATIVE_INFINITY, x);
 	}
 
 	/*
@@ -53,29 +58,43 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 	}
 
+	/*
+	Support bounds are the most positions that can be gained or lost (bounds of the set
+	of possible values)
+
+	Source: https://en.wikipedia.org/wiki/Support_(mathematics)#In_probability_and_measure_theory
+	 */
+
 	@Override
 	public double getSupportLowerBound() {
-		return 0;
+		return MAX_POSITIONS_LOST;
 	}
 
 	@Override
 	public double getSupportUpperBound() {
-		return 0;
+		return MAX_POSITIONS_GAINED;
 	}
+
+	/*
+	The most positions that can be gained or lost are possible values (i.e. it is possible to lose
+	or gain that many places), so they are included in the distribution.
+
+	All values between the bounds are possible values.
+	 */
 
 	@Override
 	public boolean isSupportLowerBoundInclusive() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isSupportUpperBoundInclusive() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isSupportConnected() {
-		return false;
+		return true;
 	}
 
 	public int getGainedPositions(int i) {
