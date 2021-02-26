@@ -4,11 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-<<<<<<< HEAD
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="12" project-jdk-type="JavaSDK">
-=======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="true" project-jdk-name="12" project-jdk-type="JavaSDK">
->>>>>>> bc48b35... Revert to Java 12 to resolve Semaphore build errors
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
