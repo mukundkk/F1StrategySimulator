@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class ResultsWriter {
 	String circuit;
+	int[] firstLapPositionChange;
 	int[] qualiPositions;
 	int[] racePositions;
 	boolean[] dnfStatus;
@@ -24,6 +25,7 @@ public class ResultsWriter {
 	public ResultsWriter() {
 		this.circuit = "";
 		driverList = GlobalInfo.getDriverList();
+		firstLapPositionChange = new int[driverList.size()];
 		qualiPositions = new int[driverList.size()];
 		racePositions = new int[driverList.size()];
 		dnfStatus = new boolean[driverList.size()];
@@ -108,6 +110,7 @@ public class ResultsWriter {
 					System.out.println("Enter " + driver.getName() + "'s finishing position: ");
 					racePositions[i] = sc.nextInt();
 				}
+				// TODO: Ask for position change in first lap
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,6 +131,7 @@ public class ResultsWriter {
 				driverObj.put("qualiPosition", qualiPositions[i]);
 				driverObj.put("DNF", dnfStatus[i]);
 				driverObj.put("racePosition", racePositions[i]);
+				// TODO: Add position change in first lap
 				json.put(driver.getLastName(), driverObj);
 			}
 

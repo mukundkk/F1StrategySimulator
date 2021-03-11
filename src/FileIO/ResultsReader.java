@@ -31,6 +31,8 @@ public class ResultsReader {
 		readFile();
 	}
 
+	// TODO: Add method (or add to readFile()) to create and return array of first lap position changes for a given driver
+
 	private void readFile() {
 		String trainingDir = "src/Data/Training/";
 		String testDir = "src/Data/Test/";
