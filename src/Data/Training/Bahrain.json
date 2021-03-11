@@ -2,111 +2,133 @@
   "Perez": {
     "qualiPosition": 18,
     "racePosition": 16,
+    "positionChange": -6,
     "DNF": false
   },
   "Rosberg": {
     "qualiPosition": 2,
     "racePosition": 1,
+    "positionChange": -1,
     "DNF": false
   },
   "Magnussen": {
     "qualiPosition": 19,
     "racePosition": 11,
+    "positionChange": 1,
     "DNF": false
   },
   "Massa": {
     "qualiPosition": 7,
     "racePosition": 8,
+    "positionChange": -5,
     "DNF": false
   },
   "Ericsson": {
     "qualiPosition": 17,
     "racePosition": 12,
+    "positionChange": 0,
     "DNF": false
   },
   "Bottas": {
     "qualiPosition": 6,
     "racePosition": 9,
+    "positionChange": -3,
     "DNF": false
   },
   "Vettel": {
     "qualiPosition": 3,
     "racePosition": 0,
+    "positionChange": 19,
     "DNF": true
   },
   "Hulkenberg": {
     "qualiPosition": 8,
     "racePosition": 15,
+    "positionChange": 8,
     "DNF": false
   },
   "Palmer": {
     "qualiPosition": 20,
     "racePosition": 0,
+    "positionChange": 2,
     "DNF": true
   },
   "Button": {
     "qualiPosition": 14,
     "racePosition": 0,
+    "positionChange": -4,
     "DNF": true
   },
   "Nasr": {
     "qualiPosition": 22,
     "racePosition": 14,
+    "positionChange": -3,
     "DNF": false
   },
   "Ocon": {
     "qualiPosition": 21,
     "racePosition": 17,
+    "positionChange": -3,
     "DNF": false
   },
   "Hamilton": {
     "qualiPosition": 1,
     "racePosition": 3,
+    "positionChange": 6,
     "DNF": false
   },
   "Alonso": {
     "qualiPosition": 12,
     "racePosition": 10,
+    "positionChange": 1,
     "DNF": false
   },
   "Raikkonen": {
     "qualiPosition": 4,
     "racePosition": 2,
+    "positionChange": 1,
     "DNF": false
   },
   "Sainz": {
     "qualiPosition": 11,
     "racePosition": 0,
+    "positionChange": 0,
     "DNF": true
   },
   "Kvyat": {
     "qualiPosition": 15,
     "racePosition": 7,
+    "positionChange": 0,
     "DNF": false
   },
   "Verstappen": {
     "qualiPosition": 10,
     "racePosition": 6,
+    "positionChange": -1,
     "DNF": false
   },
   "Wehrlein": {
     "qualiPosition": 16,
     "racePosition": 13,
+    "positionChange": -2,
     "DNF": false
   },
   "Ricciardo": {
     "qualiPosition": 5,
     "racePosition": 4,
+    "positionChange": -1,
     "DNF": false
   },
   "Grosjean": {
     "qualiPosition": 9,
     "racePosition": 5,
+    "positionChange": -3,
     "DNF": false
   },
   "Gutierrez": {
     "qualiPosition": 13,
     "racePosition": 0,
+    "positionChange": -5,
     "DNF": true
   }
 }
