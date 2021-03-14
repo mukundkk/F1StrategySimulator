@@ -1,25 +1,21 @@
 package Models;
 
-import static Data.GlobalInfo.getDriverList;
-import Util.FirstLapDistribution;
-import Util.Driver;
 
-import java.util.ArrayList;
+import FileIO.ResultsReader;
+import Util.FirstLapDistribution;
+import org.apache.commons.math3.util.FastMath;
+
 
 public class FirstLapModel {
-	private ArrayList<FirstLapDistribution> driverFirstLapDistributions;
+	private ResultsReader reader;
 
 	public FirstLapModel() {
-		driverFirstLapDistributions = new ArrayList<>();
+		reader = new ResultsReader();
 	}
 
-	private void setDriverFirstLapDistributions(){
-		for(Driver driver : getDriverList()) {
+	private int getFirstLapChange(String lastName){
 			FirstLapDistribution flDistribution = new FirstLapDistribution();
-			/*
-			TODO: get gainedPositions array data (in FirstLapDistribution) from corresponding
-				array in GlobalInfo
-			 */
-		}
+			flDistribution.setGainedPositions(reader.getAllTrainingFirstLapPositionChanges(lastName));
+			return (int) FastMath.rint(flDistribution.sample());
 	}
 }
