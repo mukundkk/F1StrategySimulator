@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public class ResultsReader {
 	String circuit;
+	int[] firstLapPositionChange;
 	int[] qualiPositions;
 	int[] racePositions;
 	boolean[] dnfStatus;
@@ -25,13 +26,22 @@ public class ResultsReader {
 		this.circuit = circuit;
 		driverList = GlobalInfo.getDriverList();
 		this.trainingSet = trainingSet;
+		firstLapPositionChange = new int[driverList.size()];
 		qualiPositions = new int[driverList.size()];
 		racePositions = new int[driverList.size()];
 		dnfStatus = new boolean[driverList.size()];
 		readFile();
 	}
 
-	// TODO: Add method (or add to readFile()) to create and return array of first lap position changes for a given driver
+	public ResultsReader() {
+		// TODO: fill in general results reader to fetch array of data per category, per driver
+	}
+
+	/*
+	TODO: Add static method to return array of first lap position changes for a given driver.
+		Also create static methods to return arrays of information for different categories for a given driver.
+		Will need to cycle through all files in training directory.
+	 */
 
 	private void readFile() {
 		String trainingDir = "src/Data/Training/";
@@ -45,6 +55,7 @@ public class ResultsReader {
 				for(int i = 0; i < driverList.size(); i++) {
 					Driver driver = driverList.get(i);
 					JsonObject driverObj = (JsonObject) parser.get(driver.getLastName());
+					firstLapPositionChange[i] = ((BigDecimal) (driverObj.get("positionChange"))).intValue();
 					qualiPositions[i] = ((BigDecimal) (driverObj.get("qualiPosition"))).intValue();
 					dnfStatus[i] = (boolean) driverObj.get("DNF");
 					racePositions[i] = ((BigDecimal) driverObj.get("racePosition")).intValue();
@@ -55,6 +66,10 @@ public class ResultsReader {
 		} else {
 			System.out.println("The file for " + circuit + " could not be found.");
 		}
+	}
+
+	public int getFirstLapPositionChange(String lastName){
+		return getDriverIndex(lastName) >= 0 ? firstLapPositionChange[getDriverIndex(lastName)] : -1;
 	}
 
 	public int getQualiPosition(String lastName) {
