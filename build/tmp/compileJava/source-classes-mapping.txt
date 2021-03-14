@@ -15,8 +15,8 @@ Models/RaceModel.java
  Models.RaceModel
 Data/Circuits/Mexico.java
  Data.Circuits.Mexico
-Models/LapOneModel.java
- Models.LapOneModel
+Models/FirstLapModel.java
+ Models.FirstLapModel
 Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
@@ -27,13 +27,13 @@ Models/OvertakingModel.java
  Models.OvertakingModel
 Data/Circuits/AbuDhabi.java
  Data.Circuits.AbuDhabi
-FileIO/IODriver.java
- FileIO.IODriver
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
 Models/PitStrategyModel.java
  Models.PitStrategyModel
 FileIO/ResultsReader.java
  FileIO.ResultsReader
 FileIO/ResultsWriter.java
  FileIO.ResultsWriter
-Data/Circuits/Japan.java
- Data.Circuits.Japan
+FileIO/IODriver.java
+ FileIO.IODriver

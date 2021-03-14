@@ -6,6 +6,7 @@ import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -33,21 +34,89 @@ public class ResultsReader {
 		readFile();
 	}
 
-	public ResultsReader() {
-		// TODO: fill in general results reader to fetch array of data per category, per driver
+	public ResultsReader(){
+		driverList = GlobalInfo.getDriverList();
+		firstLapPositionChange = new int[driverList.size()];
+		qualiPositions = new int[driverList.size()];
+		racePositions = new int[driverList.size()];
+		dnfStatus = new boolean[driverList.size()];
 	}
 
-	/*
-	TODO: Add static method to return array of first lap position changes for a given driver.
-		Also create static methods to return arrays of information for different categories for a given driver.
-		Will need to cycle through all files in training directory.
-	 */
+	// get array of all first lap position changes in the training set for a given driver
+	public int[] getAllTrainingFirstLapPositionChanges(String lastName){
+		int[] posChanges = new int[getTrainingFiles().length];
+		for (int i = 0; i < getTrainingFiles().length; i++){
+			readFile(getTrainingFiles()[i].getName(), true);
+			posChanges[i] = getFirstLapPositionChange(lastName);
+		}
+		return posChanges;
+	}
 
+	// get array of all qualifying positions in the training set for a given driver
+	public int[] getAllTrainingQualiPositions(String lastName){
+		int[] qualiPositions = new int[getTrainingFiles().length];
+		for (int i = 0; i < getTrainingFiles().length; i++){
+			readFile(getTrainingFiles()[i].getName(), true);
+			qualiPositions[i] = getQualiPosition(lastName);
+		}
+		return qualiPositions;
+	}
+
+	// get array of all race positions in the training set for a given driver
+	public int[] getAllTrainingRacePositions(String lastName){
+		int[] racePositions = new int[getTrainingFiles().length];
+		for (int i = 0; i < getTrainingFiles().length; i++){
+			readFile(getTrainingFiles()[i].getName(), true);
+			racePositions[i] = getRacePosition(lastName);
+		}
+		return racePositions;
+	}
+
+	// get array of DNF status for each race in the training set for a given driver
+	public boolean[] getAllTrainingDNFs(String lastName){
+		boolean[] DNFs = new boolean[getTrainingFiles().length];
+		for (int i = 0; i < getTrainingFiles().length; i++){
+			readFile(getTrainingFiles()[i].getName(), true);
+			DNFs[i] = didDNF(lastName);
+		}
+		return DNFs;
+	}
+
+	// get first lap position change for a given driver, for the race specified when instantiating the class
+	public int getFirstLapPositionChange(String lastName){
+		return getDriverIndex(lastName) >= 0 ? firstLapPositionChange[getDriverIndex(lastName)] : -1;
+	}
+
+	// get qualifying position for a given driver, for the race specified when instantiating the class
+	public int getQualiPosition(String lastName) {
+		return getDriverIndex(lastName) >= 0 ? qualiPositions[getDriverIndex(lastName)] : -1;
+	}
+
+	// get race position for a given driver, for the race specified when instantiating the class
+	public int getRacePosition(String lastName) {
+		return getDriverIndex(lastName) >= 0 ? racePositions[getDriverIndex(lastName)] : -1;
+	}
+
+	// get DNF status for a given driver, for the race specified when instantiating the class
+	public boolean didDNF(String lastName) {
+		return getDriverIndex(lastName) >= 0 ? dnfStatus[getDriverIndex(lastName)] : false;
+	}
+
+	// return array of files in the training directory
+	private File[] getTrainingFiles() {
+		return new File("src/Data/Training").listFiles();
+	}
+
+	// read file for the circuit & category specified when instantiating the class
 	private void readFile() {
+		readFile(circuit, this.trainingSet);
+	}
+
+	// read file for a given circuit & category
+	private void readFile(String circuit, boolean trainingSet){
 		String trainingDir = "src/Data/Training/";
 		String testDir = "src/Data/Test/";
-		String filename = circuit;
-		String path = trainingSet ? trainingDir + filename : testDir + filename;
+		String path = trainingSet ? trainingDir + circuit : testDir + circuit;
 
 		if(Files.exists(Paths.get(path))) {
 			try (Reader reader = Files.newBufferedReader(Paths.get(path))) {
@@ -68,22 +137,7 @@ public class ResultsReader {
 		}
 	}
 
-	public int getFirstLapPositionChange(String lastName){
-		return getDriverIndex(lastName) >= 0 ? firstLapPositionChange[getDriverIndex(lastName)] : -1;
-	}
-
-	public int getQualiPosition(String lastName) {
-		return getDriverIndex(lastName) >= 0 ? qualiPositions[getDriverIndex(lastName)] : -1;
-	}
-
-	public boolean didDNF(String lastName) {
-		return getDriverIndex(lastName) >= 0 ? dnfStatus[getDriverIndex(lastName)] : false;
-	}
-
-	public int getRacePosition(String lastName) {
-		return getDriverIndex(lastName) >= 0 ? racePositions[getDriverIndex(lastName)] : -1;
-	}
-
+	// get location of driver in a list or array (for use in other methods)
 	private int getDriverIndex(String lastName) {
 		for(int i = 0; i < driverList.size(); i++) {
 			if (driverList.get(i).getLastName().equals(lastName)) return i;
