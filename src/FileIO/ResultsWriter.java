@@ -110,7 +110,8 @@ public class ResultsWriter {
 					System.out.println("Enter " + driver.getName() + "'s finishing position: ");
 					racePositions[i] = sc.nextInt();
 				}
-				// TODO: Ask for position change in first lap
+				System.out.println("Enter the position change of " + driver.getName() + " on the first lap: " );
+				firstLapPositionChange[i] = sc.nextInt();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,7 +132,7 @@ public class ResultsWriter {
 				driverObj.put("qualiPosition", qualiPositions[i]);
 				driverObj.put("DNF", dnfStatus[i]);
 				driverObj.put("racePosition", racePositions[i]);
-				// TODO: Add position change in first lap
+				driverObj.put("firstLapPosChange", firstLapPositionChange[i]);
 				json.put(driver.getLastName(), driverObj);
 			}
 

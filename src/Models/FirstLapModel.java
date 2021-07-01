@@ -13,7 +13,7 @@ public class FirstLapModel {
 		reader = new ResultsReader();
 	}
 
-	private int getFirstLapChange(String lastName){
+	public int getFirstLapChange(String lastName){
 			FirstLapDistribution flDistribution = new FirstLapDistribution();
 			flDistribution.setGainedPositions(reader.getAllTrainingFirstLapPositionChanges(lastName));
 			return (int) FastMath.rint(flDistribution.sample());

@@ -21,6 +21,7 @@ public class RaceModel {
 	int[] tyreCompounds, qualiPositions;
 	double[] qualiTimes;
 	OvertakingModel overtakingModel;
+	FirstLapModel flModel;
 	DNFModel dnfModel;
 	ArrayList<Driver> drivers;
 	ArrayList<Object[]> retiredDrivers;
@@ -53,6 +54,7 @@ public class RaceModel {
 				break;
 		}
 		overtakingModel = new OvertakingModel(circuit, drivers);
+		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
 		this.tyreCompounds = tyreCompounds;
 		this.qualiTimes = qualiTimes;
@@ -92,6 +94,15 @@ public class RaceModel {
 	private void loop() {
 		// simulate actual race (laps)
 		for(int i = 1; i <= totalLaps; i++){
+
+			// first lap position changes
+			if (i == 1){
+				for (Driver driver : drivers){
+					flModel.getFirstLapChange(driver.getLastName());
+					// TODO: figure out how to actually execute the position change without loss of data
+				}
+			}
+
 			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
 			deploySafetyCar = dnfModel.checkDNFs(i, drivers, retiredDrivers, safetyCarActive);
 
@@ -110,7 +121,7 @@ public class RaceModel {
 			// if the safety car should be deployed, reset counter
 			if (deploySafetyCar) safetyCarLapCounter = 0;
 
-			// safety car only lasts for 5 laps
+			// safety car only lasts for 5 laps  
 			else if (safetyCarLapCounter >= 5) {
 				safetyCarActive = false;
 				safetyCarLapCounter = 0;
