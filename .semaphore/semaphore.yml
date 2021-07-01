@@ -10,6 +10,6 @@ blocks:
       jobs:
         - name: Build
           commands:
-            - sem-version java 12.0.1
+            - sem-version java 11
             - checkout
             - ./gradlew build
