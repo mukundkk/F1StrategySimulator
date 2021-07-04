@@ -2,21 +2,20 @@ Models/TyreModel.java
  Models.TyreModel
 Util/Driver.java
  Util.Driver
-Util/FirstLapDistribution.java
- Util.FirstLapDistribution
- Util.FirstLapDistribution$FirstLapProbabilityFunction
+FileIO/ResultsWriter.java
+ FileIO.ResultsWriter
 Models/LapTimeVarianceModel.java
  Models.LapTimeVarianceModel
-Evaluation/RunSimulation.java
- Evaluation.RunSimulation
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
 Models/FuelModel.java
  Models.FuelModel
-Models/RaceModel.java
- Models.RaceModel
+FileIO/ResultsReader.java
+ FileIO.ResultsReader
 Data/Circuits/Mexico.java
  Data.Circuits.Mexico
-Models/FirstLapModel.java
- Models.FirstLapModel
+Evaluation/RunSimulation.java
+ Evaluation.RunSimulation
 Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
@@ -27,13 +26,14 @@ Models/OvertakingModel.java
  Models.OvertakingModel
 Data/Circuits/AbuDhabi.java
  Data.Circuits.AbuDhabi
-Data/Circuits/Japan.java
- Data.Circuits.Japan
-Models/PitStrategyModel.java
- Models.PitStrategyModel
-FileIO/ResultsReader.java
- FileIO.ResultsReader
-FileIO/ResultsWriter.java
- FileIO.ResultsWriter
 FileIO/IODriver.java
  FileIO.IODriver
+Models/PitStrategyModel.java
+ Models.PitStrategyModel
+Models/RaceModel.java
+ Models.RaceModel
+Models/FirstLapModel.java
+ Models.FirstLapModel
+Util/FirstLapDistribution.java
+ Util.FirstLapDistribution
+ Util.FirstLapDistribution$FirstLapProbabilityFunction

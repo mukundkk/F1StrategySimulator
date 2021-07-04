@@ -2,8 +2,10 @@ package Util;
 
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.RombergIntegrator;
+import org.apache.commons.math3.analysis.integration.TrapezoidIntegrator;
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
 import org.apache.commons.math3.optim.MaxEval;
+import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 import org.apache.commons.math3.util.FastMath;
 
@@ -14,6 +16,10 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	private int[] gainedPositions;
 	private static final double MAX_POSITIONS_LOST = -(getDriverList().size() - 1);
 	private static final double MAX_POSITIONS_GAINED = getDriverList().size() - 1;
+
+	public FirstLapDistribution(RandomGenerator rng){
+		super(rng);
+	}
 
 	/*
 	Probability Density Function formula: https://www.desmos.com/calculator/kptertp4f4, where g(n) is the
@@ -35,8 +41,8 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	// Cumulative Probability Function is the antiderivative of the Probability Distribution Function
 	@Override
 	public double cumulativeProbability(double x) {
-		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
-				new FirstLapProbabilityFunction(), Double.NEGATIVE_INFINITY, x);
+		return new TrapezoidIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+				this::density, -1000, x);
 	}
 
 	/*
@@ -45,17 +51,18 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 
 	@Override
 	public double getNumericalMean() {
-		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
-				x -> (x * new FirstLapProbabilityFunction().value(x)),
-				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		return new TrapezoidIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+				x -> (x * density(x)),
+				-1000, 1000);
 	}
 
 	@Override
 	public double getNumericalVariance() {
+
 		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
 				x -> (FastMath.pow(x - getNumericalMean(), 2) *
-						new FirstLapProbabilityFunction().value(x)),
-				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+						density(x)),
+				-1000, 1000);
 	}
 
 	/*
@@ -111,7 +118,8 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	class FirstLapProbabilityFunction implements UnivariateFunction {
 		@Override
 		public double value(double x) {
-			return (int) x == x ? getGainedPositions((int) x) : 0;
+			// check if x is an integer, then check if it is in the bounds of the array
+			return (int) x == x ? (x >= 0 && x < gainedPositions.length) ? getGainedPositions((int) x) : 0 : 0;
 		}
 	}
 }
