@@ -1,6 +1,7 @@
 package Util;
 
 import org.apache.commons.math3.analysis.UnivariateFunction;
+import org.apache.commons.math3.analysis.integration.IterativeLegendreGaussIntegrator;
 import org.apache.commons.math3.analysis.integration.RombergIntegrator;
 import org.apache.commons.math3.analysis.integration.TrapezoidIntegrator;
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
@@ -29,7 +30,7 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	public double density(double x) {
 		double[] terms = new double[gainedPositions.length];
 		for(int i = 0; i < gainedPositions.length; i++){
-			double term1 = FastMath.pow(x - new FirstLapProbabilityFunction().value(x), 2);
+			double term1 = FastMath.pow(x - new FirstLapProbabilityFunction().value(i), 2);
 			double term2 = -term1 / 2;
 			terms[i] = FastMath.pow(FastMath.E, term2);
 		}
@@ -42,27 +43,27 @@ public class FirstLapDistribution extends AbstractRealDistribution {
 	@Override
 	public double cumulativeProbability(double x) {
 		return new TrapezoidIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
-				this::density, -1000, x);
+				this::density, -100, x);
 	}
 
 	/*
-	Formulae for numerical mean and variance: https://amsi.org.au/ESA_Senior_Years/SeniorTopic4/4e/4e_2content_4.html
+	Formulae for numerical mean and variance: https://amsi.org.au/ESA_Senior_\Years/SeniorTopic4/4e/4e_2content_4.html
 	 */
 
 	@Override
 	public double getNumericalMean() {
 		return new TrapezoidIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
 				x -> (x * density(x)),
-				-1000, 1000);
+				-10, 10);
 	}
 
 	@Override
 	public double getNumericalVariance() {
 
-		return new RombergIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
+		return new TrapezoidIntegrator().integrate(MaxEval.unlimited().getMaxEval(),
 				x -> (FastMath.pow(x - getNumericalMean(), 2) *
 						density(x)),
-				-1000, 1000);
+				-10, 10);
 	}
 
 	/*

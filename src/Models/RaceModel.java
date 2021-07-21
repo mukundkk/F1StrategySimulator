@@ -96,7 +96,7 @@ public class RaceModel {
 		for(int i = 1; i <= totalLaps; i++){
 
 			// first lap position changes
-			flModel.doFirstLapChanges(drivers);
+//			flModel.doFirstLapChanges(drivers);
 
 			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
 			deploySafetyCar = dnfModel.checkDNFs(i, drivers, retiredDrivers, safetyCarActive);

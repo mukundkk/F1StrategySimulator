@@ -14,8 +14,9 @@ FileIO/ResultsReader.java
  FileIO.ResultsReader
 Data/Circuits/Mexico.java
  Data.Circuits.Mexico
-Evaluation/RunSimulation.java
- Evaluation.RunSimulation
+Util/FirstLapDistribution.java
+ Util.FirstLapDistribution
+ Util.FirstLapDistribution$FirstLapProbabilityFunction
 Data/Circuits/US.java
  Data.Circuits.US
 Data/GlobalInfo.java
@@ -30,10 +31,9 @@ FileIO/IODriver.java
  FileIO.IODriver
 Models/PitStrategyModel.java
  Models.PitStrategyModel
-Models/RaceModel.java
- Models.RaceModel
 Models/FirstLapModel.java
  Models.FirstLapModel
-Util/FirstLapDistribution.java
- Util.FirstLapDistribution
- Util.FirstLapDistribution$FirstLapProbabilityFunction
+Evaluation/RunSimulation.java
+ Evaluation.RunSimulation
+Models/RaceModel.java
+ Models.RaceModel
