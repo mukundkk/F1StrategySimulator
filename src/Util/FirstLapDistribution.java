@@ -12,6 +12,8 @@ import org.apache.commons.math3.util.FastMath;
 
 import static Data.GlobalInfo.*;
 
+// TODO: fix first lap model backend logic/math
+
 @SuppressWarnings("deprecation")
 public class FirstLapDistribution extends AbstractRealDistribution {
 	private int[] gainedPositions;

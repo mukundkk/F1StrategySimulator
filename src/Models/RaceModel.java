@@ -95,7 +95,7 @@ public class RaceModel {
 		// simulate actual race (laps)
 		for(int i = 1; i <= totalLaps; i++){
 
-			// first lap position changes
+			// TODO: first lap position changes
 //			flModel.doFirstLapChanges(drivers);
 
 			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
