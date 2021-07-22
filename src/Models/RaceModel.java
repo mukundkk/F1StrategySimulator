@@ -62,14 +62,14 @@ public class RaceModel {
 	}
 
 	public void simulateRace() {
-		initialize();
+		init();
 
 		loop();
 
 		stop();
 	}
 
-	private void initialize() {
+	private void init() {
 		// set DNF probabilities for each driver
 		dnfModel.assignDNFProbability(drivers);
 
