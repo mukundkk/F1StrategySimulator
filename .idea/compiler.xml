@@ -12,6 +12,6 @@
         <module name="F1StrategySimulator.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="12" />
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

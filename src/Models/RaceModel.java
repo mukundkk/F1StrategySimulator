@@ -8,6 +8,7 @@ import static Data.GlobalInfo.*;
 import Data.Circuits.*;
 import Data.GlobalInfo;
 import Util.Driver;
+import Util.DriverInitInfo;
 
 public class RaceModel {
 	/*
@@ -18,8 +19,7 @@ public class RaceModel {
 	Circuit 4: Abu Dhabi
 	 */
 	int circuit;
-	int[] tyreCompounds, qualiPositions;
-	double[] qualiTimes;
+	DriverInitInfo[] driverInfos;
 	OvertakingModel overtakingModel;
 	FirstLapModel flModel;
 	DNFModel dnfModel;
@@ -29,7 +29,7 @@ public class RaceModel {
 	private boolean safetyCarActive;
 	private boolean deploySafetyCar;
 
-	public RaceModel(int circuit, int[] tyreCompounds, double[] qualiTimes, int[] qualiPositions) {
+	public RaceModel(int circuit, DriverInitInfo[] driverInfos) {
 		this.circuit = circuit;
 		safetyCarActive = false;
 		deploySafetyCar = false;
@@ -53,12 +53,10 @@ public class RaceModel {
 				totalLaps = DEFAULT_NUM_LAPS;
 				break;
 		}
+		this.driverInfos = driverInfos;
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
-		this.tyreCompounds = tyreCompounds;
-		this.qualiTimes = qualiTimes;
-		this.qualiPositions = qualiPositions;
 	}
 
 	public void simulateRace() {
@@ -75,8 +73,8 @@ public class RaceModel {
 
 		// for each driver, set quali time & set their initial tyre compound (for now, defaulting to hardest compound available for the race)
 		for (int i = 0; i < drivers.size(); i++) {
-			drivers.get(i).init(qualiTimes[i], qualiPositions[i]);
-			drivers.get(i).setTyreCompound(tyreCompounds[0]);
+			drivers.get(i).init(driverInfos[i].getQualiTime(), driverInfos[i].getQualiPosition());
+			drivers.get(i).setTyreCompound(driverInfos[i].getStartingTyreCompound());
 		}
 
 		// establish starting grid
