@@ -61,7 +61,7 @@ public class RaceModel {
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
-		pitModel = new PitStrategyModel(oneStopPossible, twoStopPossible);
+		pitModel = new PitStrategyModel(tyreCompounds, oneStopPossible, twoStopPossible);
 	}
 
 	public void simulateRace() {
@@ -76,7 +76,7 @@ public class RaceModel {
 		// set DNF probabilities for each driver
 		dnfModel.assignDNFProbability(drivers);
 
-		// for each driver, set quali time & set their initial tyre compound
+		// for each driver, set quali time & set their initial tyre compound/pit strategy
 		// if tyre compound is not specified (drivers outside the top 10), randomly select from available compounds
 		for (int i = 0; i < drivers.size(); i++) {
 			drivers.get(i).init(driverInfos[i].getQualiTime(), driverInfos[i].getQualiPosition());
@@ -84,6 +84,7 @@ public class RaceModel {
 				drivers.get(i).setTyreCompound(tyreCompounds[new Random().nextInt(tyreCompounds.length)]);
 			}
 			else drivers.get(i).setTyreCompound(driverInfos[i].getStartingTyreCompound());
+			pitModel.selectDriverStrategy(drivers.get(i).getLastName(), drivers.get(i).getTyreCompound());
 		}
 
 		// establish starting grid

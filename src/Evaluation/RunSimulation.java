@@ -60,7 +60,7 @@ public class RunSimulation {
 
 		int[] tyreCompounds = new int[]{2, 3, 4};
 
-		RaceModel race = new RaceModel(1, tyreCompounds, driverInfos);
+		RaceModel race = new RaceModel(1, tyreCompounds, true, true, driverInfos);
 		try {
 			race.simulateRace();
 		} catch (Exception e) {
