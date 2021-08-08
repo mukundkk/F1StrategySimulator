@@ -3,6 +3,7 @@ package Models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 import static Data.GlobalInfo.*;
 import Data.Circuits.*;
@@ -20,16 +21,18 @@ public class RaceModel {
 	 */
 	int circuit;
 	DriverInitInfo[] driverInfos;
+	int[] tyreCompounds;
 	OvertakingModel overtakingModel;
 	FirstLapModel flModel;
 	DNFModel dnfModel;
+	PitStrategyModel pitModel;
 	ArrayList<Driver> drivers;
 	ArrayList<Object[]> retiredDrivers;
 	private int safetyCarLapCounter;
 	private boolean safetyCarActive;
 	private boolean deploySafetyCar;
 
-	public RaceModel(int circuit, DriverInitInfo[] driverInfos) {
+	public RaceModel(int circuit, int[] tyreCompounds, boolean oneStopPossible, boolean twoStopPossible, DriverInitInfo[] driverInfos) {
 		this.circuit = circuit;
 		safetyCarActive = false;
 		deploySafetyCar = false;
@@ -53,10 +56,12 @@ public class RaceModel {
 				totalLaps = DEFAULT_NUM_LAPS;
 				break;
 		}
+		this.tyreCompounds = tyreCompounds;
 		this.driverInfos = driverInfos;
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
+		pitModel = new PitStrategyModel(oneStopPossible, twoStopPossible);
 	}
 
 	public void simulateRace() {
@@ -71,10 +76,14 @@ public class RaceModel {
 		// set DNF probabilities for each driver
 		dnfModel.assignDNFProbability(drivers);
 
-		// for each driver, set quali time & set their initial tyre compound (for now, defaulting to hardest compound available for the race)
+		// for each driver, set quali time & set their initial tyre compound
+		// if tyre compound is not specified (drivers outside the top 10), randomly select from available compounds
 		for (int i = 0; i < drivers.size(); i++) {
 			drivers.get(i).init(driverInfos[i].getQualiTime(), driverInfos[i].getQualiPosition());
-			drivers.get(i).setTyreCompound(driverInfos[i].getStartingTyreCompound());
+			if (driverInfos[i].getStartingTyreCompound() == 0) {
+				drivers.get(i).setTyreCompound(tyreCompounds[new Random().nextInt(tyreCompounds.length)]);
+			}
+			else drivers.get(i).setTyreCompound(driverInfos[i].getStartingTyreCompound());
 		}
 
 		// establish starting grid
