@@ -2,6 +2,8 @@ package Util;
 
 import Models.LapTimeVarianceModel;
 
+import java.util.Arrays;
+
 public class Driver implements Comparable<Driver>{
 	int lapNumber;
 	double qualiTime;
@@ -25,12 +27,13 @@ public class Driver implements Comparable<Driver>{
 	boolean DRSBonus;
 
 	String name;
+	String team;
 
 	LapTimeVarianceModel lapTimeModel;
 
 	int position;
 
-	public Driver(double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name){
+	public Driver(double fcZero, double fcOne, double[] c5coeffs, double[] c4coeffs, double[] c3coeffs, double[] c2coeffs, double[] c1coeffs, double stddev, String name, String team){
 		this.fuelCoefficientZero = fcZero;
 		this.fuelCoefficientOne = fcOne;
 		this.c5coeffs = c5coeffs;
@@ -40,6 +43,7 @@ public class Driver implements Comparable<Driver>{
 		this.c1coeffs = c1coeffs;
 		this.stddev = stddev;
 		this.name = name;
+		this.team = team;
 		totalRaceTime = 0;
 		DRSBonus = false;
 		lapTimeModel = new LapTimeVarianceModel(this);
@@ -222,6 +226,10 @@ public class Driver implements Comparable<Driver>{
 
 	public String getLastName() {
 		return name.split(" ")[1];
+	}
+
+	public String getTeam() {
+		return team;
 	}
 
 	public int compareTo(Driver otherDriver){

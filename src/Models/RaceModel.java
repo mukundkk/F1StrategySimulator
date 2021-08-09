@@ -61,7 +61,7 @@ public class RaceModel {
 		overtakingModel = new OvertakingModel(circuit, drivers);
 		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
-		pitModel = new PitStrategyModel(tyreCompounds, oneStopPossible, twoStopPossible);
+		pitModel = new PitStrategyModel(circuit, totalLaps, tyreCompounds, oneStopPossible, twoStopPossible);
 	}
 
 	public void simulateRace() {
@@ -109,7 +109,7 @@ public class RaceModel {
 			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
 			deploySafetyCar = dnfModel.checkDNFs(i, drivers, retiredDrivers, safetyCarActive);
 
-			// pass safety car status to lap time simulator
+			// pass safety car status to lap time simulator, check pit stops, simulate lap time
 			simulateLapTimes(i, safetyCarActive);
 
 			// drivers cannot overtake under the safety car
@@ -136,12 +136,22 @@ public class RaceModel {
 	}
 
 	private void simulateLapTimes(int lapNum, boolean safetyCarActive){
-		// TODO: set tyre compound as needed - remember that only 3 consecutive compounds are used per race (e.g. c2, c3, c4)
+
 		for(Driver driver : drivers){
+			// check if driver needs to pit & change tyre
+			int nextTyre = pitModel.checkTyre(driver.getLastName(), lapNum, driver.getTyreCompound());
+			boolean addPitTime = false;
+			if (nextTyre != 0) {
+				driver.setTyreCompound(nextTyre);
+				addPitTime = true;
+			}
+
 			driver.setLapNumber(lapNum);
-			driver.setTyreAge(lapNum);
+			// reset tyre age if switching tyres, else continue
+			driver.setTyreAge(addPitTime ? 0 : driver.getTyreAge() + 1);
 			// if safety car is active, multiply lap times by safety car factor
-			driver.setTotalRaceTime(driver.getTotalRaceTime() + (driver.getCorrectedLapTime() * (safetyCarActive ? SAFETY_CAR_FACTOR : 1)));
+			// add pit stop time if needed
+			driver.setTotalRaceTime(driver.getTotalRaceTime() + (addPitTime ? pitModel.getPitStopTime(driver.getTeam()) : 0) + driver.getCorrectedLapTime() * (safetyCarActive ? SAFETY_CAR_FACTOR : 1));
 		}
 		Collections.sort(drivers);
 	}
