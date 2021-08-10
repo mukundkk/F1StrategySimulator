@@ -23,7 +23,6 @@ public class RaceModel {
 	DriverInitInfo[] driverInfos;
 	int[] tyreCompounds;
 	OvertakingModel overtakingModel;
-	FirstLapModel flModel;
 	DNFModel dnfModel;
 	PitStrategyModel pitModel;
 	ArrayList<Driver> drivers;
@@ -59,7 +58,6 @@ public class RaceModel {
 		this.tyreCompounds = tyreCompounds;
 		this.driverInfos = driverInfos;
 		overtakingModel = new OvertakingModel(circuit, drivers);
-		flModel = new FirstLapModel();
 		dnfModel = new DNFModel();
 		pitModel = new PitStrategyModel(circuit, totalLaps, tyreCompounds, oneStopPossible, twoStopPossible);
 	}
@@ -102,9 +100,6 @@ public class RaceModel {
 	private void loop() {
 		// simulate actual race (laps)
 		for(int i = 1; i <= totalLaps; i++){
-
-			// TODO: first lap position changes
-//			flModel.doFirstLapChanges(drivers);
 
 			// check if there are any DNFs and if a safety car needs to be deployed (will be false if SC is already active)
 			deploySafetyCar = dnfModel.checkDNFs(i, drivers, retiredDrivers, safetyCarActive);

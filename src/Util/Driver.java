@@ -2,8 +2,6 @@ package Util;
 
 import Models.LapTimeVarianceModel;
 
-import java.util.Arrays;
-
 public class Driver implements Comparable<Driver>{
 	int lapNumber;
 	double qualiTime;
