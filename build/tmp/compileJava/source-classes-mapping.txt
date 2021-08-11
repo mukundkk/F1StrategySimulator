@@ -9,8 +9,8 @@ Models/LapTimeVarianceModel.java
  Models.LapTimeVarianceModel
 Util/DriverInitInfo.java
  Util.DriverInitInfo
-Data/Circuits/Japan.java
- Data.Circuits.Japan
+Evaluation/RunSimulation.java
+ Evaluation.RunSimulation
 Models/FuelModel.java
  Models.FuelModel
 Models/RaceModel.java
@@ -37,5 +37,5 @@ FileIO/ResultsReader.java
  FileIO.ResultsReader
 FileIO/ResultsWriter.java
  FileIO.ResultsWriter
-Evaluation/RunSimulation.java
- Evaluation.RunSimulation
+Data/Circuits/Japan.java
+ Data.Circuits.Japan
