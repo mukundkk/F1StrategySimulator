@@ -1,9 +1,8 @@
 = Formula 1 Race & Strategy Simulator
-Mukund Krishnakumar <mukund.krishnakumar@gmail.com>
-3.0, August 10, 2021
-:toc:
-:icons: font
-:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+image:https://mukundkk.semaphoreci.com/badges/F1StrategySimulator/branches/master.svg?key=2f3214d0-9d7a-411b-a73b-771bb2d58d49[https://mukundkk.semaphoreci.com/badges/F1StrategySimulator/branches/master.svg?key=2f3214d0-9d7a-411b-a73b-771bb2d58d49]
+
+'''
 
 == Introduction
 
@@ -57,5 +56,3 @@ More features will be added in the future - check out <<What Next?>>
 == Contact
 
 mukund.krishnakumar@gmail.com
-
-
