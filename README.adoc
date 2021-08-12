@@ -8,6 +8,25 @@ image:https://mukundkk.semaphoreci.com/badges/F1StrategySimulator/branches/maste
 
 This project aims to simulate the outcome of Formula One races using open-source data from the http://ergast.com/mrd/[Ergast Motor Racing Developer API]. As of now, it is focused on the 2016 F1 season, but more seasons may be added at a later date.
 
+== Getting Started
+
+=== Prerequisites
+Java 11 or later is required for this project.
+
+=== Running the Simulator
+
+. Download the newest JAR file from *releases*.
+. Run ```java -jar F1StrategySimulator.jar``` to start the program.
+
+If you prefer to download the source code as well:
+
+. Clone this repository
+. Enter the parent directory ~/F1StrategySimulator
+. Run a Gradle build
+* ```./gradlew build```
+. Run the generated JAR file
+* ```java -jar /build/libs/F1StrategySimulator.jar```
+
 == Features
 The overall simulator consists of multiple 'models' that predict behavior in certain important subcategories, such as tyre wear and overtakes.
 
