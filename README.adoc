@@ -17,7 +17,7 @@ Java 11 or later is required for this project.
 
 . Download and uncompress the newest release
 . Enter the directory ~/F1StrategySimulator
-. Run ```java -jar /build/libs/F1StrategySimulator.jar``` to start the program..
+. Run ```java -jar /build/libs/F1StrategySimulator.jar``` to start the program
 
 If you prefer to download the source code as well:
 
