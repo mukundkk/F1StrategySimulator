@@ -19,13 +19,13 @@ Java 11 or later is required for this project.
 . Enter the directory ~/F1StrategySimulator
 . Run ```java -jar /build/libs/F1StrategySimulator.jar``` to start the program
 
-If you prefer to download the source code as well:
+If you prefer to work on the source code as well, you can:
 
 . Clone this repository
 . Enter the parent directory ~/F1StrategySimulator
 . Run a Gradle build
 * ```./gradlew build```
-. Run the generated JAR file
+. Run the generated JAR file as needed
 * ```java -jar /build/libs/F1StrategySimulator.jar```
 
 == Features
