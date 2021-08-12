@@ -15,8 +15,9 @@ Java 11 or later is required for this project.
 
 === Running the Simulator
 
-. Download the newest JAR file from *releases*.
-. Run ```java -jar F1StrategySimulator.jar``` to start the program.
+. Download the newest release
+. Enter the directory ~/F1StrategySimulator
+. Run ```java -jar /build/libs/F1StrategySimulator.jar``` to start the program..
 
 If you prefer to download the source code as well:
 
